@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="uk" class="tw-scroll-smooth motion-reduce:tw-scroll-auto">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AllStats — демонстраційний сервіс аналізу ігрових рішень у CS2, Dota 2 та шахах.">
+  <title>AllStats — аналітика ігрових помилок</title>
+  <link rel="icon" type="image/svg+xml" href="assets/icons/logo.min.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=JetBrains+Mono:wght@400&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tailwind.generated.css">
+</head>
+<body class="tw-m-0 [color-scheme:dark] tw-bg-background tw-font-body tw-text-[13px] tw-leading-[1.5] tw-text-primary sm:tw-text-sm">
+  <div class="page tw-min-h-screen [&_*]:[-webkit-tap-highlight-color:transparent] motion-reduce:[&_*]:tw-transition-none [&_a:focus-visible]:tw-outline [&_a:focus-visible]:tw-outline-[3px] [&_a:focus-visible]:tw-outline-offset-[3px] [&_a:focus-visible]:tw-outline-accent [&_button:focus-visible]:tw-outline [&_button:focus-visible]:tw-outline-[3px] [&_button:focus-visible]:tw-outline-offset-[3px] [&_button:focus-visible]:tw-outline-accent [&_input:focus-visible]:tw-outline [&_input:focus-visible]:tw-outline-[3px] [&_input:focus-visible]:tw-outline-offset-[3px] [&_input:focus-visible]:tw-outline-accent [&_select:focus-visible]:tw-outline [&_select:focus-visible]:tw-outline-[3px] [&_select:focus-visible]:tw-outline-offset-[3px] [&_select:focus-visible]:tw-outline-accent" id="top">
+    <a class="skip-link tw-absolute tw-left-2 tw-top-2 tw-z-10 tw-translate-y-[-200%] tw-bg-header tw-px-3 tw-py-2 tw-text-primary focus:tw-translate-y-0" href="#main-content">Перейти до основного вмісту</a>
+    <!-- Header містить бренд, навігацію та основний CTA. -->
+    <header class="site-header tw-border-b tw-border-solid tw-border-line-header tw-bg-header">
+      <div class="container header-content tw-mx-auto tw-flex tw-min-h-[58px] tw-w-[calc(100%_-_28px)] tw-max-w-content tw-flex-wrap tw-items-center tw-justify-between tw-gap-4 tw-py-3 [&>*]:tw-min-w-0 [&>*]:tw-max-w-full [&_.language-switch]:tw-min-w-0 sm:tw-w-[calc(100%_-_48px)] lg:tw-gap-7">
+        <a class="brand tw-flex tw-flex-[0_0_auto] tw-items-center tw-gap-[9px] tw-font-bold tw-tracking-[.02em]" href="#top" aria-label="AllStats — на головну">
+          <img class="tw-block tw-h-[26px] tw-w-[26px] tw-object-contain" src="assets/icons/logo.min.svg" width="26" height="26" alt="">
+          <span>ALLSTATS</span>
+        </a>
+
+
+        <!-- Native disclosure: mobile navigation works without a custom JS handler. -->
+        <details id="mobile-menu" class="mobile-menu tw-relative tw-block md:tw-hidden open:[&>summary]:tw-border-accent">
+          <summary class="tw-flex tw-min-h-[44px] tw-min-w-[44px] tw-cursor-pointer tw-list-none tw-items-center tw-justify-center tw-gap-2 tw-border tw-border-solid tw-border-line tw-px-3 tw-text-primary hover:tw-border-accent focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-4 focus-visible:tw-outline-accent [&::-webkit-details-marker]:tw-hidden">
+            <span aria-hidden="true">☰</span><span>Меню</span>
+          </summary>
+          <nav aria-label="Мобільна навігація" class="tw-absolute tw-right-0 tw-top-full tw-z-50 tw-mt-2 tw-grid tw-w-[260px] tw-max-w-[calc(100vw-48px)] tw-gap-1 tw-border tw-border-solid tw-border-line tw-bg-surface tw-p-3 tw-shadow-xl">
+            <a href="#demo" class="tw-flex tw-min-h-[44px] tw-items-center tw-px-3 hover:tw-text-accent focus-visible:tw-outline">Демо аналізу</a>
+            <a href="#games" class="tw-flex tw-min-h-[44px] tw-items-center tw-px-3 hover:tw-text-accent focus-visible:tw-outline">Ігри</a>
+            <a href="#features" class="tw-flex tw-min-h-[44px] tw-items-center tw-px-3 hover:tw-text-accent focus-visible:tw-outline">Переваги</a>
+            <a href="#how-it-works" class="tw-flex tw-min-h-[44px] tw-items-center tw-px-3 hover:tw-text-accent focus-visible:tw-outline">Як це працює</a>
+            <a href="#analysis-form" class="tw-flex tw-min-h-[44px] tw-items-center tw-justify-center tw-bg-accent tw-px-3 tw-font-bold tw-text-ink hover:tw-bg-accent-hover focus-visible:tw-outline">Спробувати демо</a>
+            <p class="tw-m-0 tw-px-3 tw-py-2 tw-text-xs tw-text-muted">UA · Англійська версія ще недоступна</p>
+          </nav>
+        </details>
+
+        <nav class="header-navigation tw-min-w-0 tw-order-3 tw-hidden tw-w-full tw-flex-wrap tw-items-center tw-justify-center tw-gap-x-6 tw-gap-y-3 md:tw-flex lg:tw-order-none lg:tw-w-auto [&_a]:tw-text-xs [&_a]:tw-text-muted [&_a:hover]:tw-text-accent" aria-label="Основна навігація">
+          <a href="#demo">Демо аналізу</a>
+          <a href="#games">Ігри</a>
+          <a href="#features">Переваги</a>
+          <a href="#how-it-works">Як це працює</a>
+        </nav>
+
+        <div class="header-actions tw-min-w-0 tw-hidden tw-w-full tw-max-w-full tw-flex-wrap tw-items-center tw-justify-between tw-gap-3 md:tw-flex sm:tw-w-auto lg:tw-justify-end">
+          <div class="language-switch tw-flex tw-flex-wrap tw-items-center tw-gap-[6px] tw-text-xs tw-text-muted"><span class="tw-text-primary">UA</span><span aria-hidden="true">|</span><span>EN</span><span class="language-note [overflow-wrap:anywhere] tw-text-[10px] tw-text-muted">Англійська версія ще недоступна</span></div>
+          <a class="button button-primary button-small tw-inline-flex tw-min-h-[44px] tw-max-w-full tw-items-center tw-justify-center tw-gap-2 tw-whitespace-normal tw-border tw-border-solid tw-rounded-none tw-py-2 tw-text-xs tw-font-bold tw-text-center tw-cursor-pointer tw-transition-colors focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-4 focus-visible:tw-outline-accent tw-bg-accent tw-text-ink hover:tw-bg-accent-hover active:tw-bg-accent-hover tw-border-accent tw-px-[15px]" href="#demo">Спробувати демо <svg class="icon tw-shrink-0 tw-h-[1em] tw-w-[1em]" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M5 11h11.17l-4.58-4.59L13 5l7 7-7 7-1.41-1.41L16.17 13H5v-2z"/></svg></a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Єдиний main охоплює весь основний вміст сторінки. -->
+    <main class="container tw-mx-auto tw-w-[calc(100%_-_28px)] tw-max-w-content sm:tw-w-[calc(100%_-_48px)]" id="main-content" tabindex="-1">
+      <!-- Hero оформлено як тематичну секцію з єдиним h1 сторінки. -->
+      <section class="hero tw-relative tw-isolate tw-overflow-hidden tw-pt-[34px] tw-pb-6 sm:tw-pt-16 sm:tw-pb-[38px] before:tw-absolute before:tw-inset-0 before:tw-z-[-1] before:tw-content-[''] before:tw-bg-hero-overlay-mobile sm:before:tw-bg-hero-overlay" id="analysis">
+        <img fetchpriority="high" decoding="async" class="hero-image tw-absolute tw-inset-0 tw-z-[-2] tw-h-full tw-w-full tw-object-cover tw-object-[70%_center] sm:tw-object-right" src="assets/images/hero-960.webp" srcset="assets/images/hero-480.webp 480w, assets/images/hero-960.webp 960w, assets/images/hero-1200.webp 1200w, assets/images/hero-1600.webp 1600w, assets/images/hero-2400.webp 2400w" sizes="(min-width: 1248px) 1200px, (min-width: 640px) calc(100vw - 48px), calc(100vw - 28px)" width="2752" height="1536" alt="">
+        <div class="hero-copy tw-max-w-[560px]">
+          <p class="eyebrow tw-mb-[10px] tw-font-bold tw-text-[10px] tw-uppercase tw-tracking-[.035em] tw-text-accent">ДЕМОНСТРАЦІЙНА ПЛАТФОРМА · CS2, DOTA 2, CHESS</p>
+          <h1 class="tw-mb-4 tw-max-w-[560px] tw-font-heading tw-text-[32px] tw-font-bold tw-leading-[1.12] sm:tw-text-[clamp(32px,4vw,48px)]">Аналітика ігрових помилок та пошук патернів поразок</h1>
+          <p class="hero-description tw-mb-5 tw-max-w-[480px] tw-text-[13px] tw-text-muted sm:tw-text-sm">Зрозумілий розбір критичних моментів допомагає побачити не лише сухі цифри, а й контекст рішення, його наслідки та можливий наступний крок.</p>
+
+          <div class="hero-actions tw-mt-[18px] tw-flex tw-flex-wrap tw-gap-2 sm:tw-gap-3 [&_a]:tw-w-full sm:[&_a]:tw-w-auto">
+            <a class="button button-primary tw-inline-flex tw-min-h-[44px] tw-items-center tw-justify-center tw-gap-2 tw-border tw-border-solid tw-rounded-none tw-px-[18px] tw-py-2 tw-text-xs tw-font-bold tw-text-center tw-cursor-pointer tw-transition-colors focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-4 focus-visible:tw-outline-accent tw-bg-accent tw-text-ink hover:tw-bg-accent-hover active:tw-bg-accent-hover tw-border-accent" href="#demo">Переглянути демо</a>
+            <a class="button button-secondary tw-inline-flex tw-min-h-[44px] tw-items-center tw-justify-center tw-gap-2 tw-border tw-border-solid tw-border-line tw-rounded-none tw-px-[18px] tw-py-2 tw-text-xs tw-font-bold tw-text-center tw-cursor-pointer tw-transition-colors focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-4 focus-visible:tw-outline-accent tw-bg-transparent tw-text-primary hover:tw-bg-surface hover:tw-border-accent" href="#games"><svg class="icon tw-shrink-0 tw-h-[1em] tw-w-[1em]" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M5 11h11.17l-4.58-4.59L13 5l7 7-7 7-1.41-1.41L16.17 13H5v-2z"/></svg> Обрати гру</a>
+          </div>
+          <p class="form-note tw-mt-[10px] tw-text-[11px] tw-text-muted">Демо показує приклад інтерфейсу, а не результат аналізу реального матчу.</p>
+        </div>
+      </section>
+
+      <div class="approach-points tw-grid tw-grid-cols-1 tw-gap-[10px] tw-border-y tw-border-solid tw-border-line-grid-strong tw-py-[13px] sm:tw-grid-cols-3 sm:tw-gap-5 sm:tw-py-4 [&_p]:tw-m-0 [&_p]:tw-text-left [&_p]:tw-text-[10px] [&_p]:tw-text-muted sm:[&_p:nth-child(2)]:tw-text-center sm:[&_p:nth-child(3)]:tw-text-right">
+        <p>МАТЧ + КРИТИЧНІ МОМЕНТИ</p>
+        <p>ДОКАЗ + ПРИЧИНА ПОМИЛКИ</p>
+        <p>ПАТЕРН + НАСТУПНА ДІЯ</p>
+      </div>
+
+      <!-- Основні тематичні блоки сторінки мають власні заголовки h2. -->
+      <section class="content-section tw-scroll-mt-5 tw-border-b tw-border-solid tw-border-line-subtle tw-py-[38px] sm:tw-py-14" id="features">
+        <div class="section-heading tw-mb-[19px] sm:tw-mb-[26px]">
+          <p class="eyebrow tw-mb-[10px] tw-font-bold tw-text-[10px] tw-uppercase tw-tracking-[.035em] tw-text-accent">ПЕРЕВАГИ / ВІД ЦИФР ДО РІШЕНЬ</p>
+          <h2 class="tw-mb-[10px] tw-font-heading tw-text-2xl tw-font-medium tw-leading-[1.2] sm:tw-text-[clamp(23px,2.7vw,31px)]">Відповіді замість сухих таблиць</h2>
+        </div>
+        <!-- Картки окремих функцій оформлені як самостійні article. -->
+        <div class="feature-grid tw-grid tw-grid-cols-1 tw-gap-3 sm:tw-grid-cols-2 lg:tw-grid-cols-5">
+          <article class="feature-card tw-flex tw-min-h-0 tw-min-w-0 tw-flex-col tw-items-start tw-border tw-border-solid tw-border-line tw-bg-surface tw-p-[15px] tw-transition-colors hover:tw-border-accent sm:tw-min-h-[224px] sm:tw-p-[18px]">
+            <span class="feature-icon icon-crosshair tw-mb-[15px] tw-text-[25px] tw-leading-none tw-text-accent" aria-hidden="true">⊕</span>
+            <h3 class="tw-mb-2 tw-font-heading tw-text-[15px] tw-font-medium tw-leading-[1.35]">Critical Moments Feed</h3>
+            <p class="tw-mb-3 tw-text-xs tw-text-muted sm:tw-mb-[14px]">У задумі добірка критичних моментів допоможе зосередитися на рішеннях, що могли вплинути на результат.</p>
+            <span class="card-footnote tw-mt-auto tw-border-t tw-border-solid tw-border-line tw-pt-[11px] tw-text-[10px] tw-text-accent">План: момент → наслідок → дія</span>
+          </article>
+          <article class="feature-card tw-flex tw-min-h-0 tw-min-w-0 tw-flex-col tw-items-start tw-border tw-border-solid tw-border-line tw-bg-surface tw-p-[15px] tw-transition-colors hover:tw-border-accent sm:tw-min-h-[224px] sm:tw-p-[18px]">
+            <img class="feature-icon tw-mb-[15px] tw-h-[26px] tw-w-[26px] tw-object-contain" src="assets/icons/analytics_icon.min.svg" width="26" height="26" loading="lazy" decoding="async" alt="">
+            <h3 class="tw-mb-2 tw-font-heading tw-text-[15px] tw-font-medium tw-leading-[1.35]">Similarity Search Engine</h3>
+            <p class="tw-mb-3 tw-text-xs tw-text-muted sm:tw-mb-[14px]">Запланований пошук схожих ситуацій має допомогти помічати повторювані рішення.</p>
+            <span class="card-footnote tw-mt-auto tw-border-t tw-border-solid tw-border-line tw-pt-[11px] tw-text-[10px] tw-text-accent">Задум: повторювані ситуації</span>
+          </article>
+          <article class="feature-card tw-flex tw-min-h-0 tw-min-w-0 tw-flex-col tw-items-start tw-border tw-border-solid tw-border-line tw-bg-surface tw-p-[15px] tw-transition-colors hover:tw-border-accent sm:tw-min-h-[224px] sm:tw-p-[18px]">
+            <span class="feature-icon icon-timer tw-mb-[15px] tw-text-[25px] tw-leading-none tw-text-accent" aria-hidden="true">◴</span>
+            <h3 class="tw-mb-2 tw-font-heading tw-text-[15px] tw-font-medium tw-leading-[1.35]">Interactive Timeline</h3>
+            <p class="tw-mb-3 tw-text-xs tw-text-muted sm:tw-mb-[14px]">У майбутньому таймлайн має показувати контекст події до та після неї.</p>
+            <span class="card-footnote tw-mt-auto tw-border-t tw-border-solid tw-border-line tw-pt-[11px] tw-text-[10px] tw-text-accent">Задум: подія + контекст</span>
+          </article>
+          <article class="feature-card tw-flex tw-min-h-0 tw-min-w-0 tw-flex-col tw-items-start tw-border tw-border-solid tw-border-line tw-bg-surface tw-p-[15px] tw-transition-colors hover:tw-border-accent sm:tw-min-h-[224px] sm:tw-p-[18px]">
+            <img class="feature-icon tw-mb-[15px] tw-h-[26px] tw-w-[26px] tw-object-contain" src="assets/icons/security_icon.min.svg" width="26" height="26" loading="lazy" decoding="async" alt="">
+            <h3 class="tw-mb-2 tw-font-heading tw-text-[15px] tw-font-medium tw-leading-[1.35]">Доказова база</h3>
+            <p class="tw-mb-3 tw-text-xs tw-text-muted sm:tw-mb-[14px]">Заплановано пов’язувати пояснення з контекстом раунду й конкретним моментом.</p>
+            <span class="card-footnote tw-mt-auto tw-border-t tw-border-solid tw-border-line tw-pt-[11px] tw-text-[10px] tw-text-accent">План: раунд + таймкод + факт</span>
+          </article>
+          <article class="feature-card tw-flex tw-min-h-0 tw-min-w-0 tw-flex-col tw-items-start tw-border tw-border-solid tw-border-line tw-bg-surface tw-p-[15px] tw-transition-colors hover:tw-border-accent sm:tw-min-h-[224px] sm:tw-p-[18px]">
+            <img class="feature-icon tw-mb-[15px] tw-h-[26px] tw-w-[26px] tw-object-contain" src="assets/icons/profile_icon.min.svg" width="26" height="26" loading="lazy" decoding="async" alt="">
+            <h3 class="tw-mb-2 tw-font-heading tw-text-[15px] tw-font-medium tw-leading-[1.35]">Мультигра українською мовою</h3>
+            <p class="tw-mb-3 tw-text-xs tw-text-muted sm:tw-mb-[14px]">Демо показує концепцію для CS2, Dota 2 і шахів із поясненнями українською.</p>
+            <span class="card-footnote tw-mt-auto tw-border-t tw-border-solid tw-border-line tw-pt-[11px] tw-text-[10px] tw-text-accent">Одна мова для різних ігор</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section tw-scroll-mt-5 tw-border-b tw-border-solid tw-border-line-subtle tw-py-[38px] sm:tw-py-14" id="games">
+        <div class="section-heading tw-mb-[19px] sm:tw-mb-[26px] [&_h2]:tw-mb-[10px] [&_h2]:tw-font-heading [&_h2]:tw-text-2xl [&_h2]:tw-font-medium [&_h2]:tw-leading-[1.2] sm:[&_h2]:tw-text-[clamp(23px,2.7vw,31px)] [&_p:last-child]:tw-mb-0 [&_p:last-child]:tw-max-w-[760px] [&_p:last-child]:tw-text-xs [&_p:last-child]:tw-text-muted sm:[&_p:last-child]:tw-text-[13px]">
+          <p class="eyebrow tw-mb-[10px] tw-font-bold tw-text-[10px] tw-uppercase tw-tracking-[.035em] tw-text-accent">ТРИ ІГРОВІ ДИСЦИПЛІНИ</p>
+          <h2>Різні ігри. Одна логіка аналізу.</h2>
+          <p>Картки показують, як можна розбирати ситуації в різних іграх. Це демонстраційні сценарії, а не аналіз підключеного профілю.</p>
+        </div>
+        <!-- Приклади для кожної дисципліни — самостійні article. -->
+        <div class="discipline-grid tw-grid tw-grid-cols-1 tw-gap-3.5 sm:tw-grid-cols-2 lg:tw-grid-cols-3">
+          <article class="discipline-card tw-flex tw-min-h-[300px] tw-min-w-0 tw-flex-col tw-border tw-border-solid tw-border-l-2 tw-border-line tw-border-l-accent tw-bg-surface tw-p-[15px] tw-transition-colors hover:tw-border-accent sm:tw-min-h-[340px] sm:tw-p-[18px]">
+            <div class="card-topline tw-mb-[15px] tw-flex tw-items-center tw-justify-between tw-gap-3 tw-text-[11px]"><span class="game-tag tw-border tw-border-solid tw-border-accent tw-px-2 tw-py-1 tw-text-accent">CS2</span><span>Freemium</span></div>
+            <h3 class="tw-mb-2 tw-font-heading tw-text-[17px] tw-font-medium tw-leading-[1.35]">Critical Moments Feed</h3>
+            <p class="tw-text-xs tw-text-muted">Демо ілюструє сценарій розбору рішення в раунді, його наслідків і можливого кроку для практики.</p>
+            <div class="demo-data tw-mt-auto tw-border-t tw-border-solid tw-border-line tw-py-[14px] tw-pb-3 [&_.eyebrow]:tw-mb-[7px]">
+              <p class="eyebrow tw-mb-[10px] tw-font-bold tw-text-[10px] tw-uppercase tw-tracking-[.035em] tw-text-accent">ДЕМО · СЦЕНАРІЙ РОЗБОРУ</p>
+              <p class="data-date tw-mt-2 tw-font-data tw-text-[10px]">Рішення гравця · командна підтримка · наслідок</p>
+            </div>
+            <a class="button button-secondary card-button tw-inline-flex tw-min-h-[44px] tw-items-center tw-justify-center tw-gap-2 tw-border tw-border-solid tw-border-line tw-rounded-none tw-px-[18px] tw-py-2 tw-text-xs tw-font-bold tw-text-center tw-cursor-pointer tw-transition-colors focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-4 focus-visible:tw-outline-accent tw-bg-transparent tw-text-primary hover:tw-bg-surface hover:tw-border-accent tw-w-full" href="#demo" data-demo-target="cs2">Переглянути демо</a>
+          </article>
+          <article class="discipline-card tw-flex tw-min-h-[300px] tw-min-w-0 tw-flex-col tw-border tw-border-solid tw-border-l-2 tw-border-line tw-border-l-danger tw-bg-surface tw-p-[15px] tw-transition-colors hover:tw-border-accent sm:tw-min-h-[340px] sm:tw-p-[18px]">
+            <div class="card-topline tw-mb-[15px] tw-flex tw-items-center tw-justify-between tw-gap-3 tw-text-[11px]"><span class="game-tag tw-border tw-border-solid tw-border-accent tw-px-2 tw-py-1 tw-text-accent">Dota 2</span><span>Pro</span></div>
+            <h3 class="tw-mb-2 tw-font-heading tw-text-[17px] tw-font-medium tw-leading-[1.35]">Similarity Search Engine</h3>
+            <p class="tw-text-xs tw-text-muted">Запланований сценарій пошуку схожих ситуацій допоможе порівнювати рішення та розглядати альтернативи.</p>
+            <div class="demo-data tw-mt-auto tw-border-t tw-border-solid tw-border-line tw-py-[14px] tw-pb-3 [&_.eyebrow]:tw-mb-[7px]">
+              <p class="eyebrow tw-mb-[10px] tw-font-bold tw-text-[10px] tw-uppercase tw-tracking-[.035em] tw-text-accent">ДЕМО · СЦЕНАРІЙ РОЗБОРУ</p>
+              <p class="data-date tw-mt-2 tw-font-data tw-text-[10px]">Схожі ігрові ситуації · альтернативні рішення</p>
+            </div>
+            <a class="button button-secondary card-button tw-inline-flex tw-min-h-[44px] tw-items-center tw-justify-center tw-gap-2 tw-border tw-border-solid tw-border-line tw-rounded-none tw-px-[18px] tw-py-2 tw-text-xs tw-font-bold tw-text-center tw-cursor-pointer tw-transition-colors focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-4 focus-visible:tw-outline-accent tw-bg-transparent tw-text-primary hover:tw-bg-surface hover:tw-border-accent tw-w-full" href="#demo" data-demo-target="dota2">Переглянути демо</a>
+          </article>
+          <article class="discipline-card tw-flex tw-min-h-[300px] tw-min-w-0 tw-flex-col tw-border tw-border-solid tw-border-l-2 tw-border-line tw-border-l-accent tw-bg-surface tw-p-[15px] tw-transition-colors hover:tw-border-accent sm:tw-min-h-[340px] sm:tw-p-[18px]">
+            <div class="card-topline tw-mb-[15px] tw-flex tw-items-center tw-justify-between tw-gap-3 tw-text-[11px]"><span class="game-tag tw-border tw-border-solid tw-border-accent tw-px-2 tw-py-1 tw-text-accent">Chess</span><span>Freemium</span></div>
+            <h3 class="tw-mb-2 tw-font-heading tw-text-[17px] tw-font-medium tw-leading-[1.35]">Interactive Timeline</h3>
+            <p class="tw-text-xs tw-text-muted">Демо ілюструє, як можна показати ключові ходи та зміни оцінки позиції.</p>
+            <div class="demo-data tw-mt-auto tw-border-t tw-border-solid tw-border-line tw-py-[14px] tw-pb-3 [&_.eyebrow]:tw-mb-[7px]">
+              <p class="eyebrow tw-mb-[10px] tw-font-bold tw-text-[10px] tw-uppercase tw-tracking-[.035em] tw-text-accent">ДЕМО · СЦЕНАРІЙ РОЗБОРУ</p>
+              <p class="data-date tw-mt-2 tw-font-data tw-text-[10px]">Ключові ходи · зміна оцінки позиції</p>
+            </div>
+            <a class="button button-secondary card-button tw-inline-flex tw-min-h-[44px] tw-items-center tw-justify-center tw-gap-2 tw-border tw-border-solid tw-border-line tw-rounded-none tw-px-[18px] tw-py-2 tw-text-xs tw-font-bold tw-text-center tw-cursor-pointer tw-transition-colors focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-4 focus-visible:tw-outline-accent tw-bg-transparent tw-text-primary hover:tw-bg-surface hover:tw-border-accent tw-w-full" href="#demo" data-demo-target="chess">Переглянути хід</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section tw-scroll-mt-5 tw-border-b tw-border-solid tw-border-line-subtle tw-py-[38px] sm:tw-py-14" id="how-it-works">
+        <div class="section-heading tw-mb-[19px] sm:tw-mb-[26px] [&_h2]:tw-mb-[10px] [&_h2]:tw-font-heading [&_h2]:tw-text-2xl [&_h2]:tw-font-medium [&_h2]:tw-leading-[1.2] sm:[&_h2]:tw-text-[clamp(23px,2.7vw,31px)] [&_p:last-child]:tw-mb-0 [&_p:last-child]:tw-max-w-[760px] [&_p:last-child]:tw-text-xs [&_p:last-child]:tw-text-muted sm:[&_p:last-child]:tw-text-[13px]">
+          <p class="eyebrow tw-mb-[10px] tw-font-bold tw-text-[10px] tw-uppercase tw-tracking-[.035em] tw-text-accent">ЗАПЛАНОВАНИЙ СЦЕНАРІЙ</p>
+          <h2>Від матчу до наступного рішення</h2>
+          <p>Це задум майбутньої роботи продукту. Наразі сайт демонструє інтерфейс і приклад розбору.</p>
+        </div>
+        <div class="tw-grid tw-grid-cols-1 tw-gap-3 sm:tw-grid-cols-2 lg:tw-grid-cols-3">
+          <article class="tw-border tw-border-solid tw-border-line tw-bg-surface tw-p-5 [&_h3]:tw-mb-2 [&_h3]:tw-font-heading [&_h3]:tw-text-[17px] [&_h3]:tw-font-medium [&_h3]:tw-leading-[1.35] [&_p:last-child]:tw-mb-0 [&_p:last-child]:tw-text-sm [&_p:last-child]:tw-text-muted">
+            <p class="tw-m-0 tw-font-data tw-text-sm tw-text-accent">01 / ГРА</p>
+            <h3 class="tw-mt-4">Оберіть гру</h3>
+            <p class="tw-mb-0 tw-text-sm tw-text-muted">CS2, Dota 2 або шахи — сценарій розбору залежить від дисципліни.</p>
+          </article>
+          <article class="tw-border tw-border-solid tw-border-line tw-bg-surface tw-p-5 [&_h3]:tw-mb-2 [&_h3]:tw-font-heading [&_h3]:tw-text-[17px] [&_h3]:tw-font-medium [&_h3]:tw-leading-[1.35] [&_p:last-child]:tw-mb-0 [&_p:last-child]:tw-text-sm [&_p:last-child]:tw-text-muted">
+            <p class="tw-m-0 tw-font-data tw-text-sm tw-text-accent">02 / МАТЧ</p>
+            <h3 class="tw-mt-4">Додайте ідентифікатор або дані матчу</h3>
+            <p class="tw-mb-0 tw-text-sm tw-text-muted">Запланований крок для майбутнього сервісу. Поточна форма нічого не надсилає.</p>
+          </article>
+          <article class="tw-border tw-border-solid tw-border-line tw-bg-surface tw-p-5 [&_h3]:tw-mb-2 [&_h3]:tw-font-heading [&_h3]:tw-text-[17px] [&_h3]:tw-font-medium [&_h3]:tw-leading-[1.35] [&_p:last-child]:tw-mb-0 [&_p:last-child]:tw-text-sm [&_p:last-child]:tw-text-muted">
+            <p class="tw-m-0 tw-font-data tw-text-sm tw-text-accent">03 / РОЗБІР</p>
+            <h3 class="tw-mt-4">Перегляньте пояснення</h3>
+            <p class="tw-mb-0 tw-text-sm tw-text-muted">У задумі продукту це таймлайн, причини критичних моментів і рекомендації для практики.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section demo-section tw-scroll-mt-5 tw-border-b-0 tw-py-[38px] sm:tw-py-14" id="demo">
+        <div class="section-heading tw-mb-[19px] tw-mt-[26px] sm:tw-mb-[26px] [&_h2]:tw-mb-[10px] [&_h2]:tw-font-heading [&_h2]:tw-text-2xl [&_h2]:tw-font-medium [&_h2]:tw-leading-[1.2] sm:[&_h2]:tw-text-[clamp(23px,2.7vw,31px)] [&_p:last-child]:tw-mb-0 [&_p:last-child]:tw-max-w-[760px] [&_p:last-child]:tw-text-xs [&_p:last-child]:tw-text-muted sm:[&_p:last-child]:tw-text-[13px]">
+          <p class="eyebrow tw-mb-[10px] tw-font-bold tw-text-[10px] tw-uppercase tw-tracking-[.035em] tw-text-accent">ДЕМО / РОЗБІР ОДНОГО РІШЕННЯ</p>
+          <h2 id="demo-title" class="focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-4 focus-visible:tw-outline-accent" tabindex="-1">Не просто «де». А «чому» і «що далі».</h2>
+          <p>Подія на таймлайні, контекст матчу та зрозумілий наступний крок — в одному розборі.</p>
+        </div>
+        <div class="tw-mb-5 tw-flex tw-flex-wrap tw-gap-2" role="tablist" aria-label="Оберіть гру для демонстрації" aria-orientation="horizontal">
+          <button class="demo-tab tw-inline-flex tw-min-h-[44px] tw-items-center tw-justify-center tw-border tw-border-solid tw-border-accent tw-bg-accent tw-px-4 tw-py-2 tw-text-xs tw-font-bold tw-text-ink tw-transition-colors tw-duration-200 motion-reduce:tw-transition-none focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-4 focus-visible:tw-outline-accent" id="demo-tab-cs2" type="button" role="tab" aria-selected="true" aria-controls="demo-panel-cs2" tabindex="0" data-demo-tab="cs2">CS2</button>
+          <button class="demo-tab tw-inline-flex tw-min-h-[44px] tw-items-center tw-justify-center tw-border tw-border-solid tw-border-line tw-bg-transparent tw-px-4 tw-py-2 tw-text-xs tw-font-bold tw-text-primary tw-transition-colors tw-duration-200 motion-reduce:tw-transition-none hover:tw-border-accent focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-4 focus-visible:tw-outline-accent" id="demo-tab-dota2" type="button" role="tab" aria-selected="false" aria-controls="demo-panel-dota2" tabindex="-1" data-demo-tab="dota2">Dota 2</button>
+          <button class="demo-tab tw-inline-flex tw-min-h-[44px] tw-items-center tw-justify-center tw-border tw-border-solid tw-border-line tw-bg-transparent tw-px-4 tw-py-2 tw-text-xs tw-font-bold tw-text-primary tw-transition-colors tw-duration-200 motion-reduce:tw-transition-none hover:tw-border-accent focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-4 focus-visible:tw-outline-accent" id="demo-tab-chess" type="button" role="tab" aria-selected="false" aria-controls="demo-panel-chess" tabindex="-1" data-demo-tab="chess">Шахи</button>
+        </div>
+        <div class="tw-relative tw-overflow-hidden" id="demo-panels">
+        <div id="demo-panel-cs2" role="tabpanel" aria-labelledby="demo-tab-cs2" aria-hidden="false" tabindex="0" data-demo-panel="cs2">
+          <h3 class="tw-m-0 tw-font-heading tw-text-lg tw-font-medium tw-text-primary focus:tw-outline focus:tw-outline-2 focus:tw-outline-offset-4 focus:tw-outline-accent" id="demo-heading-cs2" tabindex="-1" data-demo-heading>CS2 · Демонстраційний розбір раунду</h3>
+          <p class="tw-mb-0 tw-mt-2 tw-text-xs tw-text-muted">Умовний приклад ігрової ситуації, не результат реального матчу.</p>
+        <div class="timeline-preview tw-mb-4 tw-border tw-border-solid tw-border-line tw-bg-surface tw-p-3 sm:tw-p-4 [&_.preview-heading]:tw-flex [&_.preview-heading]:tw-items-center [&_.preview-heading]:tw-justify-between [&_.preview-heading]:tw-gap-3 [&_.preview-heading]:tw-border-b [&_.preview-heading]:tw-border-solid [&_.preview-heading]:tw-border-line [&_.preview-heading]:tw-pb-[10px] [&_.preview-match]:tw-flex [&_.preview-match]:tw-items-center [&_.preview-match]:tw-justify-between [&_.preview-match]:tw-gap-3 [&_.preview-match]:tw-border-b [&_.preview-match]:tw-border-solid [&_.preview-match]:tw-border-line [&_.preview-match]:tw-py-[10px] [&_.preview-match]:tw-text-muted [&_.preview-summary]:tw-flex [&_.preview-summary]:tw-items-center [&_.preview-summary]:tw-justify-between [&_.preview-summary]:tw-gap-3 [&_.preview-summary]:tw-border-b [&_.preview-summary]:tw-border-solid [&_.preview-summary]:tw-border-line [&_.preview-summary]:tw-py-[10px] [&_.preview-summary]:tw-text-muted" role="group" aria-label="Демонстраційний таймлайн матчу">
+          <div class="preview-heading">
+            <span>ALLSTATS / TIMELINE</span>
+            <span class="accent-text tw-text-accent">Демо · CS2</span>
+          </div>
+          <div class="preview-match">
+            <span>Mirage · Competitive</span>
+            <span>ROUND 12 / 24</span>
+          </div>
+          <div class="preview-summary">
+            <span>Події раунду</span>
+            <span class="danger-text tw-font-data tw-text-danger">00:28 / 01:55</span>
+          </div>
+          <div class="mini-timeline tw-relative tw-mt-[10px] tw-h-[68px] tw-border tw-border-solid tw-border-line-grid tw-bg-timeline-grid before:tw-absolute before:tw-left-0 before:tw-right-0 before:tw-top-1/2 before:tw-h-px before:tw-bg-timeline before:tw-content-['']" aria-hidden="true">
+            <span class="timeline-marker tw-absolute tw-top-[calc(50%_-_4px)] tw-z-[1] tw-h-2 tw-w-2 tw-rounded-full tw-bg-accent tw-left-[9%]"></span>
+            <span class="timeline-marker tw-absolute tw-top-[calc(50%_-_4px)] tw-z-[1] tw-h-2 tw-w-2 tw-rounded-full tw-bg-danger tw-left-[25%]"></span>
+            <span class="timeline-marker tw-absolute tw-top-[calc(50%_-_4px)] tw-z-[1] tw-h-2 tw-w-2 tw-rounded-full tw-bg-accent tw-left-[44%]"></span>
+            <span class="timeline-marker tw-absolute tw-top-[calc(50%_-_4px)] tw-z-[1] tw-h-2 tw-w-2 tw-rounded-full tw-bg-danger tw-left-[67%]"></span>
+            <span class="timeline-marker tw-absolute tw-top-[calc(50%_-_4px)] tw-z-[1] tw-h-2 tw-w-2 tw-rounded-full tw-bg-accent tw-left-[88%]"></span>
+          </div>
+          <div class="preview-legend tw-flex tw-gap-[15px] tw-py-[9px] tw-pb-[14px] tw-text-[10px] tw-text-muted"><span>● kills</span><span class="danger-text tw-text-danger">■ critical death</span></div>
+          <div class="preview-insight tw-border tw-border-solid tw-border-danger tw-border-l-[3px] tw-bg-insight tw-p-[14px] [&_.insight-meta]:tw-mb-2 [&_.insight-meta]:tw-flex [&_.insight-meta]:tw-items-center [&_.insight-meta]:tw-justify-between [&_.insight-meta]:tw-gap-3 [&_.insight-meta]:tw-text-[10px] [&_.insight-meta]:tw-text-muted [&_h3]:tw-mb-[6px] [&_h3]:tw-font-heading [&_h3]:tw-text-base [&_h3]:tw-font-medium [&_h3]:tw-leading-[1.2] [&_p]:tw-mb-[6px] [&_p]:tw-text-[11px] [&_p]:tw-text-muted [&_p:last-child]:tw-text-accent">
+            <div class="insight-meta"><span class="danger-text tw-text-danger">КРИТИЧНИЙ МОМЕНТ · ПОЗИЦІОНУВАННЯ</span><span class="tw-font-data">R12 · 00:18</span></div>
+            <h3>Що сталося: ранній вихід без підтримки</h3>
+            <p>Гравець вийшов на позицію до флешки, поки напарник залишався за укриттям.</p>
+            <p class="accent-text tw-text-accent">Що покращити: узгодити вихід із командою та дочекатися підтримки.</p>
+          </div>
+        </div>
+        <div class="match-demo tw-overflow-hidden tw-border tw-border-solid tw-border-line tw-bg-surface [&_.match-toolbar]:tw-flex [&_.match-toolbar]:tw-min-h-[68px] [&_.match-toolbar]:tw-flex-wrap [&_.match-toolbar]:tw-items-start [&_.match-toolbar]:tw-justify-between [&_.match-toolbar]:tw-gap-3 [&_.match-toolbar]:tw-border-b [&_.match-toolbar]:tw-border-solid [&_.match-toolbar]:tw-border-line-grid-strong [&_.match-toolbar]:tw-p-3 sm:[&_.match-toolbar]:tw-flex-nowrap sm:[&_.match-toolbar]:tw-items-center sm:[&_.match-toolbar]:tw-px-4 sm:[&_.match-toolbar]:tw-py-3 [&_.match-title]:tw-order-3 [&_.match-title]:tw-grid [&_.match-title]:tw-w-full [&_.match-title]:tw-gap-[3px] [&_.match-title]:tw-text-left [&_.match-title]:tw-text-[10px] [&_.match-title]:tw-text-muted sm:[&_.match-title]:tw-order-none sm:[&_.match-title]:tw-w-auto sm:[&_.match-title]:tw-text-center [&_.match-toolbar_.accent-text]:tw-ml-auto [&_.match-toolbar_.accent-text]:tw-text-[10px] sm:[&_.match-toolbar_.accent-text]:tw-ml-0">
+          <div class="match-toolbar">
+            <div class="match-title"><span>Демо · Mirage · Competitive</span><span class="tw-font-data">13.10.2026 · 14:32 UTC / 24 rounds</span></div>
+            <span class="accent-text tw-text-accent">Демонстраційні дані</span>
+          </div>
+          <div class="round-selector tw-border-b tw-border-solid tw-border-line-grid-strong tw-px-3 tw-py-[13px] sm:tw-px-4 [&_.eyebrow]:tw-mb-2">
+            <p class="eyebrow tw-mb-[10px] tw-font-bold tw-text-[10px] tw-uppercase tw-tracking-[.035em] tw-text-accent">РАУНДИ МАТЧУ</p>
+            <div class="round-numbers tw-grid tw-grid-cols-[repeat(8,minmax(28px,1fr))] tw-gap-[3px] tw-overflow-x-auto sm:tw-grid-cols-[repeat(24,minmax(22px,1fr))]">
+              <span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">01</span><span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">02</span><span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">03</span><span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">04</span><span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">05</span><span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">06</span>
+              <span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">07</span><span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">08</span><span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">09</span><span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">10</span><span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">11</span><span class="active-round tw-border tw-border-solid tw-border-danger tw-bg-danger tw-px-[2px] tw-py-[5px] tw-text-center tw-font-data tw-text-[9px] tw-text-inverse">12</span>
+              <span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">13</span><span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">14</span><span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">15</span><span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">16</span><span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">17</span><span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">18</span>
+              <span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">19</span><span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">20</span><span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">21</span><span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">22</span><span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">23</span><span class="tw-px-[2px] tw-py-[5px] tw-border tw-border-solid tw-border-line-grid-light tw-text-center tw-font-data tw-text-[9px] tw-text-muted">24</span>
+            </div>
+          </div>
+          <div class="match-legend tw-flex tw-flex-wrap tw-items-center tw-justify-start tw-gap-2 tw-px-3 tw-pb-2 tw-pt-3 tw-text-[10px] tw-text-muted sm:tw-gap-3 sm:tw-px-4"><span>● kills</span><span>■ deaths</span><span>□ objectives</span><span class="match-round-label tw-ml-0 tw-w-full tw-font-data sm:tw-ml-auto sm:tw-w-auto">R12 · T SIDE · 1:55</span></div>
+          <div class="match-timeline tw-grid tw-gap-0 tw-px-3 sm:tw-px-4 [&_.timeline-row]:tw-grid [&_.timeline-row]:tw-min-h-[31px] [&_.timeline-row]:tw-grid-cols-[46px_minmax(0,1fr)] [&_.timeline-row]:tw-items-center [&_.timeline-row]:tw-text-[10px] [&_.timeline-row]:tw-text-muted sm:[&_.timeline-row]:tw-grid-cols-[70px_minmax(0,1fr)] [&_.timeline-row>div]:tw-relative [&_.timeline-row>div]:tw-h-[25px] [&_.timeline-row>div]:tw-border [&_.timeline-row>div]:tw-border-solid [&_.timeline-row>div]:tw-border-line-grid [&_.timeline-row>div]:tw-bg-event-grid [&_.timeline-row>div]:before:tw-absolute [&_.timeline-row>div]:before:tw-left-0 [&_.timeline-row>div]:before:tw-right-0 [&_.timeline-row>div]:before:tw-top-1/2 [&_.timeline-row>div]:before:tw-h-px [&_.timeline-row>div]:before:tw-bg-timeline [&_.timeline-row>div]:before:tw-content-[''] [&_.event]:tw-absolute [&_.event]:tw-top-[calc(50%_-_3px)] [&_.event]:tw-z-[1] [&_.event]:tw-h-[7px] [&_.event]:tw-w-[7px] [&_.event-green]:tw-rounded-full [&_.event-green]:tw-bg-accent [&_.event-red]:tw-bg-danger [&_.event-white]:tw-bg-soft" role="img" aria-label="Демонстраційний таймлайн раунду 12 із 24 тривалістю 1:55. Перший kill на Mid о 00:09, ранній пуш із втратою 40 HP о 00:18, смерть без розміну о 00:28, встановлення бомби о 01:02. Показано 4 kills, 4 deaths і 2 objectives.">
+            <div class="timeline-row"><span>kills</span><div><i class="event event-green tw-left-[18%]"></i><i class="event event-green tw-left-[48%]"></i><i class="event event-green tw-left-[72%]"></i><i class="event event-green tw-left-[91%]"></i></div></div>
+            <div class="timeline-row"><span>deaths</span><div><i class="event event-red tw-left-[25%]"></i><i class="event event-red tw-left-[33%]"></i><i class="event event-red tw-left-[70%]"></i><i class="event event-red tw-left-[97%]"></i></div></div>
+            <div class="timeline-row"><span>objectives</span><div><i class="event event-white tw-left-[64%]"></i><i class="event event-white tw-left-[95%]"></i></div></div>
+          </div>
+          <div class="timeline-times tw-flex tw-justify-between tw-gap-3 tw-overflow-hidden tw-px-3 tw-pb-[14px] tw-pt-[7px] tw-pl-[58px] tw-font-data tw-text-[9px] tw-text-muted tw-whitespace-nowrap sm:tw-gap-0 sm:tw-px-4 sm:tw-pl-[86px]">
+            <span>00:00</span><span>00:18</span><span>00:39</span><span>00:57</span><span>01:16</span><span>01:36</span><span>01:55</span>
+          </div>
+          <div class="round-details tw-grid tw-grid-cols-1 tw-border-t tw-border-solid tw-border-line sm:tw-grid-cols-[minmax(220px,.35fr)_minmax(0,1fr)] [&_.round-context]:tw-border-r-0 [&_.round-context]:tw-border-b [&_.round-context]:tw-border-solid [&_.round-context]:tw-border-line [&_.round-context]:tw-p-[14px] [&_.round-insight]:tw-p-[14px] sm:[&_.round-context]:tw-border-b-0 sm:[&_.round-context]:tw-border-r sm:[&_.round-context]:tw-p-4 sm:[&_.round-insight]:tw-p-4">
+            <div class="round-context [&_h3]:tw-mb-2 [&_h3]:tw-font-heading [&_h3]:tw-text-[13px] [&_h3]:tw-font-medium [&_h3]:tw-leading-[1.35] [&_p]:tw-m-0 [&_p]:tw-border-b [&_p]:tw-border-solid [&_p]:tw-border-line-grid-dim [&_p]:tw-py-[10px] [&_p]:tw-text-[11px] [&_p]:tw-text-muted [&_p_span:first-child]:tw-mr-2 [&_p_span:first-child]:tw-font-data [&_.selected-event]:tw-border-danger [&_.selected-event]:tw-text-primary [&_.selected-event_span]:tw-text-danger">
+              <h3>Контекст раунду</h3>
+              <p><span>00:09</span> Перший kill на Mid</p>
+              <p class="selected-event"><span>00:18</span> Ранній пуш —40 HP</p>
+              <p><span>00:28</span> Смерть без розміну</p>
+              <p><span>01:02</span> Встановлення бомби</p>
+              <!-- Дрібний пояснювальний підпис у макеті нечитабельний. -->
+            </div>
+            <div class="round-insight [&_.insight-meta]:tw-mb-2 [&_.insight-meta]:tw-flex [&_.insight-meta]:tw-items-center [&_.insight-meta]:tw-justify-between [&_.insight-meta]:tw-gap-3 [&_.insight-meta]:tw-text-[10px] [&_.insight-meta]:tw-text-muted [&_h3]:tw-mb-3 [&_h3]:tw-font-heading [&_h3]:tw-text-[19px] [&_h3]:tw-font-medium [&_h3]:tw-leading-[1.35] sm:[&_h3]:tw-text-[21px] [&_p]:tw-mb-[9px] [&_p]:tw-text-xs [&_p]:tw-text-muted [&_p.accent-text]:tw-text-accent">
+              <div class="insight-meta"><span class="danger-text tw-text-danger">КРИТИЧНИЙ МОМЕНТ / ПОЗИЦІОНУВАННЯ</span><span class="tw-font-data">R12 · 00:18</span></div>
+              <!-- Цей заголовок і показники належать до демонстраційного прикладу з макета. -->
+              <h3>Що сталося: ранній вихід без підтримки</h3>
+              <div class="insight-stats tw-my-3 tw-flex tw-gap-12 tw-text-[10px] tw-text-muted"><span>HP<br><strong class="tw-mt-1 tw-inline-block tw-font-data tw-text-primary">100 → 60</strong></span><span>Flash<br><strong class="tw-mt-1 tw-inline-block tw-font-data tw-text-primary">0</strong></span><span>Support<br><strong class="tw-mt-1 tw-inline-block tw-font-data tw-text-primary">18 м</strong></span></div>
+              <p><strong>Чому це важливо:</strong> без узгодженої підтримки ранній вихід залишає гравця вразливим і ускладнює розмін.</p>
+              <p class="accent-text"><strong>Що покращити:</strong> дочекатися флешки та синхронізувати вихід із напарником.</p>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="tw-mb-5 tw-border tw-border-solid tw-border-line tw-bg-surface tw-p-4" id="demo-panel-dota2" role="tabpanel" aria-labelledby="demo-tab-dota2" tabindex="0" data-demo-panel="dota2" aria-hidden="true" inert hidden>
+          <h3 class="tw-m-0 tw-font-heading tw-text-lg tw-font-medium tw-text-primary focus:tw-outline focus:tw-outline-2 focus:tw-outline-offset-4 focus:tw-outline-accent" id="demo-heading-dota2" tabindex="-1" data-demo-heading>Dota 2 · Ілюстративний розбір рішення</h3>
+          <p class="tw-mb-4 tw-mt-2 tw-text-xs tw-text-accent">Демонстраційний сценарій · вигаданий приклад, не реальний матч</p>
+          <div class="tw-grid tw-grid-cols-1 tw-gap-3 sm:tw-grid-cols-3">
+            <div class="tw-border tw-border-solid tw-border-line tw-bg-insight tw-p-4">
+              <h4 class="tw-mb-2 tw-font-heading tw-text-sm tw-font-medium">Ситуація</h4>
+              <p class="tw-m-0 tw-text-xs tw-text-muted">Команда щойно виграла сутичку й вирішує: продовжити переслідування суперників чи використати вікно часу для цілі на мапі.</p>
+            </div>
+            <div class="tw-border tw-border-solid tw-border-line tw-bg-insight tw-p-4">
+              <h4 class="tw-mb-2 tw-font-heading tw-text-sm tw-font-medium">Рішення для розбору</h4>
+              <p class="tw-m-0 tw-text-xs tw-text-muted">Перед продовженням погоні гравець оцінює доступність команди, видимість суперників і безпечність шляху до цілі.</p>
+            </div>
+            <div class="tw-border tw-border-solid tw-border-line tw-bg-insight tw-p-4">
+              <h4 class="tw-mb-2 tw-font-heading tw-text-sm tw-font-medium">Можливий наступний крок</h4>
+              <p class="tw-m-0 tw-text-xs tw-text-muted">Звірити ресурси й позиції союзників; якщо продовження розділить команду, згрупуватися та обрати безпечнішу ціль.</p>
+            </div>
+          </div>
+        </div>
+        <div class="tw-mb-5 tw-border tw-border-solid tw-border-line tw-bg-surface tw-p-4" id="demo-panel-chess" role="tabpanel" aria-labelledby="demo-tab-chess" tabindex="0" data-demo-panel="chess" aria-hidden="true" inert hidden>
+          <h3 class="tw-m-0 tw-font-heading tw-text-lg tw-font-medium tw-text-primary focus:tw-outline focus:tw-outline-2 focus:tw-outline-offset-4 focus:tw-outline-accent" id="demo-heading-chess" tabindex="-1" data-demo-heading>Шахи · Приклад ходу з поясненням</h3>
+          <p class="tw-mb-4 tw-mt-2 tw-text-xs tw-text-accent">Демонстраційний приклад · початкова позиція, без оцінки сили ходу</p>
+          <div class="tw-border tw-border-solid tw-border-line tw-bg-insight tw-p-4">
+            <p class="tw-mb-2 tw-font-data tw-text-sm tw-text-primary"><strong>1. e4</strong></p>
+            <p class="tw-m-0 tw-text-xs tw-text-muted">Білі пересувають королівського пішака на дві клітини: це займає простір у центрі та відкриває діагоналі для ферзя й слона. Це лише один зрозумілий приклад першого ходу, а не твердження про найкращий хід у будь-якій позиції.</p>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <!-- Відео завантажується лише після запиту відвідувача. -->
+      <section class="content-section tw-scroll-mt-5 tw-border-b tw-border-solid tw-border-line-subtle tw-py-[38px] sm:tw-py-14" id="video">
+      <div class="section-heading tw-mb-[19px] sm:tw-mb-[26px] [&_h2]:tw-mb-[10px] [&_h2]:tw-font-heading [&_h2]:tw-text-2xl [&_h2]:tw-font-medium [&_h2]:tw-leading-[1.2] sm:[&_h2]:tw-text-[clamp(23px,2.7vw,31px)] [&_p:last-child]:tw-mb-0 [&_p:last-child]:tw-max-w-[760px] [&_p:last-child]:tw-text-xs [&_p:last-child]:tw-text-muted sm:[&_p:last-child]:tw-text-[13px]">
+          <p class="eyebrow tw-mb-[10px] tw-font-bold tw-text-[10px] tw-uppercase tw-tracking-[.035em] tw-text-accent">ВІДЕОПРЕЗЕНТАЦІЯ</p>
+          <h2>Побачте розбір у дії</h2>
+        </div>
+        <figure class="tw-m-0 tw-mx-auto tw-w-full tw-max-w-3xl">
+          <div class="tw-mx-auto tw-aspect-video tw-w-full tw-max-w-3xl tw-overflow-hidden tw-border tw-border-solid tw-border-line tw-bg-surface" id="video-embed">
+            <div class="tw-flex tw-h-full tw-flex-col tw-items-center tw-justify-center tw-gap-3 tw-p-4 tw-text-center">
+              <p class="tw-m-0 tw-max-w-md tw-text-xs tw-text-muted" id="video-cookie-note">Натискання завантажить YouTube — сторонній сервіс, який може використовувати cookies.</p>
+              <button class="tw-inline-flex tw-min-h-[44px] tw-max-w-full tw-items-center tw-justify-center tw-border tw-border-solid tw-border-accent tw-bg-accent tw-px-4 tw-py-2 tw-text-sm tw-font-bold tw-text-ink tw-transition-colors hover:tw-bg-accent-hover focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-4 focus-visible:tw-outline-accent" type="button" data-load-embed="video" aria-describedby="video-cookie-note">Завантажити відео</button>
+            </div>
+          </div>
+          <figcaption class="tw-mt-3 tw-text-xs tw-text-muted">Тематичне відео про демонстраційний розбір матчів.</figcaption>
+        </figure>
+      </section>
+
+      <div class="closing-zone tw-bg-header tw-px-4 sm:tw-px-6">
+        <section class="content-section tw-scroll-mt-5 tw-border-b tw-border-solid tw-border-line-subtle tw-py-[38px] sm:tw-py-14" id="faq" aria-labelledby="faq-title">
+          <div class="section-heading tw-mb-[19px] sm:tw-mb-[26px]">
+            <p class="eyebrow tw-mb-[10px] tw-font-bold tw-text-[10px] tw-uppercase tw-tracking-[.035em] tw-text-accent">ПОШИРЕНІ ЗАПИТАННЯ</p>
+            <h2 class="tw-mb-[10px] tw-font-heading tw-text-2xl tw-font-medium tw-leading-[1.2] sm:tw-text-[clamp(23px,2.7vw,31px)]" id="faq-title">Коротко про AllStats</h2>
+          </div>
+          <div class="tw-divide-y tw-divide-solid tw-divide-line">
+            <details class="tw-py-4">
+              <summary class="tw-min-h-[44px] tw-cursor-pointer tw-py-2 tw-font-heading tw-text-base tw-text-primary tw-transition-colors tw-duration-200 hover:tw-text-accent hover:tw-bg-white/5 focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-2 focus-visible:tw-outline-accent">Які ігри представлені?</summary>
+              <p class="tw-mb-0 tw-max-w-3xl tw-text-sm tw-text-muted">На сайті є демонстраційні сценарії для CS2, Dota 2 та шахів. Вони показують можливу логіку майбутнього аналізу.</p>
+            </details>
+            <details class="tw-py-4">
+              <summary class="tw-min-h-[44px] tw-cursor-pointer tw-py-2 tw-font-heading tw-text-base tw-text-primary tw-transition-colors tw-duration-200 hover:tw-text-accent hover:tw-bg-white/5 focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-2 focus-visible:tw-outline-accent">Що саме демонструє сайт?</summary>
+              <p class="tw-mb-0 tw-max-w-3xl tw-text-sm tw-text-muted">Це макет інтерфейсу з прикладом таймлайну та поясненням ігрового моменту. Сайт не підключається до матчів і не виконує аналіз.</p>
+            </details>
+            <details class="tw-py-4">
+              <summary class="tw-min-h-[44px] tw-cursor-pointer tw-py-2 tw-font-heading tw-text-base tw-text-primary tw-transition-colors tw-duration-200 hover:tw-text-accent hover:tw-bg-white/5 focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-2 focus-visible:tw-outline-accent">Чи потрібен пароль ігрового профілю?</summary>
+              <p class="tw-mb-0 tw-max-w-3xl tw-text-sm tw-text-muted">Ні. Ніколи не вводьте пароль Steam або іншого ігрового профілю. Демонстраційна форма не надсилає введені дані.</p>
+            </details>
+          </div>
+        </section>
+
+      <!-- Форма залишається демонстраційною і не надсилає введені дані. -->
+      <section class="analysis-cta tw-mb-8 tw-mt-4 tw-grid tw-grid-cols-1 tw-gap-[22px] tw-scroll-mt-5 tw-border tw-border-solid tw-border-line tw-bg-surface tw-px-[14px] tw-py-[18px] sm:tw-mb-12 sm:tw-mt-[30px] sm:tw-grid-cols-[1fr_.9fr] sm:tw-gap-10 sm:tw-p-[30px]" id="analysis-form">
+        <div class="cta-copy [&_h2]:tw-mb-[10px] [&_h2]:tw-max-w-[500px] [&_h2]:tw-font-heading [&_h2]:tw-text-[23px] [&_h2]:tw-font-medium [&_h2]:tw-leading-[1.2] sm:[&_h2]:tw-text-[clamp(23px,2.7vw,31px)] [&_p:not(.eyebrow)]:tw-mb-3 [&_p:not(.eyebrow)]:tw-max-w-[480px] [&_p:not(.eyebrow)]:tw-text-[13px] [&_p:not(.eyebrow)]:tw-text-muted">
+          <p class="eyebrow tw-mb-[10px] tw-font-bold tw-text-[10px] tw-uppercase tw-tracking-[.035em] tw-text-accent">ВАШ НАСТУПНИЙ МАТЧ ПОЧИНАЄТЬСЯ З РОЗБОРУ</p>
+          <h2 id="analysis-form-title">Знайдіть помилку, яку варто перестати повторювати.</h2>
+          <p>Оберіть гру та перегляньте демонстраційний інтерфейс. Форма не запускає аналіз і не передає дані.</p>
+          <p class="form-note tw-mt-[10px] tw-text-[11px] tw-text-muted">Пароль ігрового профілю не потрібен і не запитується.</p>
+        </div>
+        <form class="analysis-form tw-flex tw-flex-col tw-items-stretch" aria-labelledby="analysis-form-title" aria-describedby="form-demo-note">
+          <label class="tw-mb-[7px] tw-text-xs" for="game-choice">Гра</label>
+          <select class="tw-mb-4 tw-min-h-[44px] tw-border tw-border-solid tw-border-line tw-rounded-none tw-bg-input tw-px-3 tw-text-sm tw-text-primary tw-transition-colors tw-duration-200 tw-cursor-pointer hover:tw-border-accent hover:tw-bg-surface focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-2 focus-visible:tw-outline-accent" id="game-choice" name="game">
+            <option value="cs2">CS2</option>
+            <option value="dota2">Dota 2</option>
+            <option value="chess">Шахи</option>
+          </select>
+          <p class="demo-note tw-mb-0 tw-mt-2 tw-text-[11px] tw-text-muted" id="form-demo-note">Демо: вибір і введені дані залишаються у формі. Надсилання та аналіз не виконуються.</p>
+          <label class="tw-mb-[7px] tw-text-xs" for="player-id">Ігровий ID або нікнейм (необов’язково)</label>
+          <div class="input-wrap tw-relative tw-mb-3">
+            <input class="tw-min-h-[42px] tw-w-full tw-border tw-border-solid tw-border-line tw-bg-input tw-px-3 tw-pr-10 tw-text-xs tw-text-primary placeholder:tw-text-subtle focus-visible:tw-outline focus-visible:tw-outline-[3px] focus-visible:tw-outline-offset-[3px] focus-visible:tw-outline-accent" id="player-id" name="player-id" type="text" autocomplete="off" placeholder="Для прикладу інтерфейсу">
+            <span class="tw-absolute tw-right-3 tw-top-1/2 -tw-translate-y-1/2 tw-text-muted" aria-hidden="true">♙</span>
+          </div>
+          <button class="button button-primary submit-button tw-inline-flex tw-min-h-[44px] tw-items-center tw-justify-center tw-gap-2 tw-border tw-border-solid tw-rounded-none tw-px-[18px] tw-py-2 tw-text-xs tw-font-bold tw-text-center tw-cursor-pointer tw-transition-colors focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-4 focus-visible:tw-outline-accent tw-bg-accent tw-text-ink hover:tw-bg-accent-hover active:tw-bg-accent-hover tw-border-accent tw-w-full" type="submit" aria-describedby="form-demo-note">Переглянути демонстрацію</button>
+        </form>
+      </section>
+      </div>
+    </main>
+
+    <!-- Footer містить інформаційні та юридичні посилання сторінки. -->
+    <footer class="site-footer tw-border-t tw-border-solid tw-border-line tw-bg-header" id="footer">
+      <div class="container tw-mx-auto tw-w-[calc(100%_-_28px)] tw-max-w-content sm:tw-w-[calc(100%_-_48px)]">
+        <div class="footer-main tw-grid tw-grid-cols-1 tw-gap-6 tw-py-6 md:tw-grid-cols-2 lg:tw-grid-cols-[1fr_.9fr_1.2fr] lg:tw-gap-12 lg:tw-py-[30px]">
+          <div class="footer-brand">
+            <a class="brand tw-flex tw-flex-[0_0_auto] tw-items-center tw-gap-[9px] tw-font-bold tw-tracking-[.02em]" href="#top" aria-label="AllStats — на головну">
+              <img class="tw-block tw-h-[26px] tw-w-[26px] tw-object-contain" src="assets/icons/logo.min.svg" width="26" height="26" loading="lazy" decoding="async" alt="">
+              <span>ALLSTATS</span>
+            </a>
+            <p class="tw-my-3 tw-max-w-[270px] tw-text-[11px] tw-text-muted">Аналітика рішень, а не лише статистики. CS2, Dota 2 та шахи — українською.</p>
+            <a class="tw-inline-flex tw-min-h-[44px] tw-max-w-full tw-flex-wrap tw-items-center tw-justify-center tw-gap-2 tw-border tw-border-solid tw-border-accent tw-bg-accent tw-px-3 tw-py-2 tw-text-center tw-text-xs tw-font-bold tw-text-ink tw-transition-colors tw-duration-200 hover:tw-bg-accent-hover focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-4 focus-visible:tw-outline-accent" href="#location" aria-label="Перейти до карти Білого дому у футері">Білий дім на карті</a>
+            <p class="accent-text tw-my-3 tw-text-[10px] tw-font-bold tw-text-accent">ПОБАЧТЕ ПОМИЛКУ. ЗМІНІТЬ РІШЕННЯ.</p>
+          </div>
+          <nav class="footer-links tw-grid tw-grid-cols-1 tw-gap-7 sm:tw-grid-cols-2 [&_>div]:tw-grid [&_>div]:tw-content-start [&_>div]:tw-gap-[9px] [&_h2]:tw-mb-[2px] [&_h2]:tw-font-heading [&_h2]:tw-text-[11px] [&_h2]:tw-leading-[1.35] [&_a]:tw-text-[11px] [&_a]:tw-text-muted [&_a:hover]:tw-text-accent" aria-label="Посилання в підвалі">
+            <div><h2>Продукт</h2><a href="#demo">Демо аналізу</a><a href="#games">Ігри</a><a href="#features">Переваги</a><a href="#how-it-works">Як це працює</a></div>
+            <div><h2>Довідка</h2><a href="#analysis-form">Демонстраційна форма</a><a href="#faq">Безпека профілю</a><a href="#faq">Поширені запитання</a><a href="#video">Відеопрезентація</a></div>
+          </nav>
+          <div class="legal-copy tw-border-t tw-border-solid tw-border-line-subtle tw-pt-1 md:tw-col-span-2 lg:tw-col-span-1 sm:tw-border-t-0 sm:tw-pt-0 [&_h2]:tw-mb-[2px] [&_h2]:tw-font-heading [&_h2]:tw-text-[11px] [&_h2]:tw-font-normal [&_h2]:tw-leading-[1.35] [&_p]:tw-my-[9px] [&_p]:tw-text-[10px] [&_p]:tw-text-muted">
+            <h2>Юридичний дисклеймер для Valve</h2>
+            <p>AllStats — незалежна платформа, не пов’язана з Valve Corporation і не схвалена нею.</p>
+            <p>Counter-Strike 2 (CS2), Dota 2 та Steam є торговельними марками Valve Corporation. Усі права належать відповідним правовласникам.</p>
+            <p>Конфіденційність · Умови використання</p>
+          </div>
+        </div>
+        <!-- Карта завантажується лише після запиту відвідувача. -->
+        <section class="tw-mx-auto tw-my-8 tw-w-full tw-max-w-3xl tw-scroll-mt-5" id="location" aria-labelledby="location-title">
+          <h2 class="tw-mb-2 tw-font-heading tw-text-xl tw-font-medium tw-text-primary" id="location-title">Білий дім, Вашингтон, США</h2>
+          <p class="tw-mb-4 tw-text-xs tw-text-muted">Демонстраційна локація, не офіс AllStats.</p>
+          <div class="tw-h-[240px] tw-w-full tw-overflow-hidden tw-border tw-border-solid tw-border-line tw-bg-surface sm:tw-h-[320px]" id="location-embed">
+            <div class="tw-flex tw-h-full tw-flex-col tw-items-center tw-justify-center tw-gap-3 tw-p-4 tw-text-center">
+              <p class="tw-m-0 tw-max-w-md tw-text-xs tw-text-muted" id="map-cookie-note">Натискання завантажить Google Maps — сторонній сервіс, який може використовувати cookies.</p>
+              <button class="tw-inline-flex tw-min-h-[44px] tw-max-w-full tw-items-center tw-justify-center tw-border tw-border-solid tw-border-accent tw-bg-accent tw-px-4 tw-py-2 tw-text-sm tw-font-bold tw-text-ink tw-transition-colors hover:tw-bg-accent-hover focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-4 focus-visible:tw-outline-accent" type="button" data-load-embed="map" aria-describedby="map-cookie-note">Завантажити карту</button>
+            </div>
+          </div>
+        </section>
+        <div class="footer-bottom tw-flex tw-min-h-[40pнx] tw-items-center tw-justify-between tw-gap-3 tw-border-t tw-border-solid tw-border-line-subtle tw-text-[9px] tw-text-muted sm:tw-min-h-[42px] sm:tw-text-[10px] [&_.language-switch]:tw-flex [&_.language-switch]:tw-flex-wrap [&_.language-switch]:tw-items-center [&_.language-switch]:tw-gap-[6px]">
+          <span>© 2026 AllStats. Усі права захищені.</span>
+          <div class="language-switch tw-flex tw-flex-wrap tw-items-center tw-gap-[6px] tw-text-xs tw-text-muted [&>span:first-child]:tw-text-primary"><span>UA</span><span aria-hidden="true">|</span><span>EN</span><span class="language-note [overflow-wrap:anywhere] tw-text-[10px] tw-text-muted">Англійська версія ще недоступна</span></div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script>
+    const analysisForm = document.querySelector('.analysis-form');
+    const gameChoice = document.getElementById('game-choice');
+    const demoTabs = Array.from(document.querySelectorAll('[data-demo-tab]'));
+    const demoPanels = Array.from(document.querySelectorAll('[data-demo-panel]'));
+    const demoPanelsContainer = document.getElementById('demo-panels');
+    let activeDemoGame = demoTabs.find((tab) => tab.getAttribute('aria-selected') === 'true').dataset.demoTab;
+    let demoAnimations = [];
+    let demoTransitionId = 0;
+
+    function setPanelAvailability(panel, available) {
+      panel.hidden = !available;
+      panel.inert = !available;
+      panel.setAttribute('aria-hidden', String(!available));
+    }
+
+    function activateDemo(game, shouldNavigate = false) {
+      const selectedTab = demoTabs.find((tab) => tab.dataset.demoTab === game);
+      const selectedPanel = demoPanels.find((panel) => panel.dataset.demoPanel === game);
+      const demoHeading = selectedPanel?.querySelector('[data-demo-heading]');
+
+      if (!selectedTab || !selectedPanel || !demoHeading) {
+        throw new Error(`Unknown game demo: ${game}`);
+      }
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isSameGame = game === activeDemoGame;
+      if (isSameGame) {
+        if (shouldNavigate) {
+          demoHeading.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+          demoHeading.focus({ preventScroll: true });
+        }
+        return;
+      }
+
+      const previousPanel = demoPanels.find((panel) => panel.dataset.demoPanel === activeDemoGame);
+      const transitionId = ++demoTransitionId;
+      demoAnimations.forEach((animation) => animation.cancel());
+      demoAnimations = [];
+      demoPanels.forEach((panel) => panel.classList.remove('tw-absolute', 'tw-inset-0', 'tw-w-full'));
+
+      demoPanels.forEach((panel) => setPanelAvailability(panel, panel === previousPanel));
+      const startHeight = demoPanelsContainer.getBoundingClientRect().height;
+
+      demoTabs.forEach((tab) => {
+        const isSelected = tab === selectedTab;
+        tab.setAttribute('aria-selected', String(isSelected));
+        tab.tabIndex = isSelected ? 0 : -1;
+        tab.classList.toggle('tw-border-accent', isSelected);
+        tab.classList.toggle('tw-bg-accent', isSelected);
+        tab.classList.toggle('tw-text-ink', isSelected);
+        tab.classList.toggle('tw-border-line', !isSelected);
+        tab.classList.toggle('tw-bg-transparent', !isSelected);
+        tab.classList.toggle('tw-text-primary', !isSelected);
+      });
+
+      activeDemoGame = game;
+      if (prefersReducedMotion) {
+        demoPanels.forEach((panel) => setPanelAvailability(panel, panel === selectedPanel));
+      } else {
+        setPanelAvailability(selectedPanel, true);
+        const enterAnimation = selectedPanel.animate(
+          [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0)' }],
+          { duration: 240, easing: 'ease-out', fill: 'forwards' }
+        );
+        demoAnimations.push(enterAnimation);
+
+        if (previousPanel) {
+          setPanelAvailability(previousPanel, false);
+          previousPanel.hidden = false;
+          previousPanel.classList.add('tw-absolute', 'tw-inset-0', 'tw-w-full');
+          const exitAnimation = previousPanel.animate(
+            [{ opacity: 1, transform: 'translateY(0)' }, { opacity: 0, transform: 'translateY(-6px)' }],
+            { duration: 240, easing: 'ease-in', fill: 'forwards' }
+          );
+          demoAnimations.push(exitAnimation);
+        }
+
+        const targetHeight = demoPanelsContainer.getBoundingClientRect().height;
+        const heightAnimation = demoPanelsContainer.animate(
+          [{ height: `${startHeight}px` }, { height: `${targetHeight}px` }],
+          { duration: 240, easing: 'ease-in-out', fill: 'forwards' }
+        );
+        demoAnimations.push(heightAnimation);
+
+        let unfinished = demoAnimations.length;
+        const finishTransition = () => {
+          unfinished -= 1;
+          if (unfinished !== 0 || transitionId !== demoTransitionId) return;
+
+          if (previousPanel) {
+            previousPanel.hidden = true;
+            previousPanel.classList.remove('tw-absolute', 'tw-inset-0', 'tw-w-full');
+          }
+          demoAnimations.forEach((animation) => animation.cancel());
+          demoAnimations = [];
+        };
+        demoAnimations.forEach((animation) => {
+          animation.onfinish = finishTransition;
+        });
+      }
+
+      if (shouldNavigate) {
+        demoHeading.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+        demoHeading.focus({ preventScroll: true });
+      }
+    }
+
+    document.querySelectorAll('[data-demo-target]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        activateDemo(link.dataset.demoTarget, true);
+      });
+    });
+
+    demoTabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activateDemo(tab.dataset.demoTab));
+      tab.addEventListener('keydown', (event) => {
+        let nextIndex = index;
+        if (event.key === 'ArrowRight') nextIndex = (index + 1) % demoTabs.length;
+        else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + demoTabs.length) % demoTabs.length;
+        else if (event.key === 'Home') nextIndex = 0;
+        else if (event.key === 'End') nextIndex = demoTabs.length - 1;
+        else return;
+
+        event.preventDefault();
+        const nextTab = demoTabs[nextIndex];
+        activateDemo(nextTab.dataset.demoTab);
+        nextTab.focus();
+      });
+    });
+
+    analysisForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      activateDemo(gameChoice.value, true);
+    });
+
+    document.querySelectorAll('[data-load-embed]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const type = button.dataset.loadEmbed;
+        if (type !== 'video' && type !== 'map') return;
+
+        const container = document.getElementById(type === 'video' ? 'video-embed' : 'location-embed');
+        if (!container || container.querySelector('iframe')) return;
+
+        const iframe = document.createElement('iframe');
+        iframe.className = type === 'video'
+          ? 'tw-block tw-h-full tw-w-full tw-border-0'
+          : 'tw-block tw-h-[240px] tw-w-full tw-border-0 sm:tw-h-[320px]';
+        iframe.title = type === 'video' ? 'Відеопрезентація AllStats' : 'Карта Білого дому у Вашингтоні, США';
+        iframe.loading = 'lazy';
+        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+
+        if (type === 'video') {
+          iframe.allow = 'encrypted-media; picture-in-picture';
+          iframe.allowFullscreen = true;
+          iframe.src = 'https://www.youtube-nocookie.com/embed/sKUEAKWzgbg';
+        } else {
+          iframe.src = 'https://www.google.com/maps?q=The+White+House,+1600+Pennsylvania+Avenue+NW,+Washington,+DC,+USA&output=embed';
+        }
+
+        container.replaceChildren(iframe);
+        iframe.focus();
+      });
+    });
+
+    // Close the mobile disclosure after navigation, outside click or Escape.
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenu) {
+      mobileMenu.addEventListener('click', (event) => {
+        if (event.target.closest('a[href]')) mobileMenu.open = false;
+      });
+      document.addEventListener('click', (event) => {
+        if (!mobileMenu.contains(event.target)) mobileMenu.open = false;
+      });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && mobileMenu.open) {
+          mobileMenu.open = false;
+          mobileMenu.querySelector('summary').focus();
+        }
+      });
+      const desktopMenuQuery = window.matchMedia('(min-width: 768px)');
+      desktopMenuQuery.addEventListener('change', (event) => {
+        if (event.matches) mobileMenu.open = false;
+      });
+    }
+  </script>
+</body>
+</html>
