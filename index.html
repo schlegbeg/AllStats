@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=JetBrains+Mono:wght@400&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/tailwind.generated.css">
+  <script src="./assets/js/validation.js" defer></script>
 </head>
 <body class="tw-m-0 [color-scheme:dark] tw-bg-background tw-font-body tw-text-[13px] tw-leading-[1.5] tw-text-primary sm:tw-text-sm">
   <div class="page tw-min-h-screen [&_*]:[-webkit-tap-highlight-color:transparent] motion-reduce:[&_*]:tw-transition-none [&_a:focus-visible]:tw-outline [&_a:focus-visible]:tw-outline-[3px] [&_a:focus-visible]:tw-outline-offset-[3px] [&_a:focus-visible]:tw-outline-accent [&_button:focus-visible]:tw-outline [&_button:focus-visible]:tw-outline-[3px] [&_button:focus-visible]:tw-outline-offset-[3px] [&_button:focus-visible]:tw-outline-accent [&_input:focus-visible]:tw-outline [&_input:focus-visible]:tw-outline-[3px] [&_input:focus-visible]:tw-outline-offset-[3px] [&_input:focus-visible]:tw-outline-accent [&_select:focus-visible]:tw-outline [&_select:focus-visible]:tw-outline-[3px] [&_select:focus-visible]:tw-outline-offset-[3px] [&_select:focus-visible]:tw-outline-accent" id="top">
@@ -361,6 +362,83 @@
           <button class="button button-primary submit-button tw-inline-flex tw-min-h-[44px] tw-items-center tw-justify-center tw-gap-2 tw-border tw-border-solid tw-rounded-none tw-px-[18px] tw-py-2 tw-text-xs tw-font-bold tw-text-center tw-cursor-pointer tw-transition-colors focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-4 focus-visible:tw-outline-accent tw-bg-accent tw-text-ink hover:tw-bg-accent-hover active:tw-bg-accent-hover tw-border-accent tw-w-full" type="submit" aria-describedby="form-demo-note">Переглянути демонстрацію</button>
         </form>
       </section>
+
+      <section class="tw-mb-10 tw-mt-8 tw-scroll-mt-5 tw-border tw-border-solid tw-border-line tw-bg-surface tw-p-4 sm:tw-mb-14 sm:tw-mt-12 sm:tw-p-8" id="feedback" aria-labelledby="feedback-title">
+        <div class="tw-mb-6 tw-max-w-2xl">
+          <p class="tw-mb-2 tw-text-[10px] tw-font-bold tw-uppercase tw-tracking-[.035em] tw-text-accent">ЗВОРОТНИЙ ЗВ’ЯЗОК</p>
+          <h2 class="tw-mb-2 tw-break-words tw-font-heading tw-text-[clamp(21px,5vw,30px)] tw-font-medium tw-leading-tight tw-text-primary" id="feedback-title">Напишіть команді AllStats</h2>
+          <p class="tw-m-0 tw-break-words tw-text-sm tw-text-muted">Заповніть демонстраційну форму. Перевірка введення відбуватиметься у вашому браузері.</p>
+          <p class="tw-mb-0 tw-mt-3 tw-text-xs tw-text-muted">Усі поля обов’язкові.</p>
+        </div>
+
+        <noscript><p class="tw-mb-4 tw-break-words tw-text-sm tw-text-muted">Для перевірки й використання цієї демонстраційної форми потрібно ввімкнути JavaScript.</p></noscript>
+        <form class="tw-grid tw-min-w-0 tw-grid-cols-1 tw-gap-x-5 tw-gap-y-4 md:tw-grid-cols-2" id="feedbackForm" aria-labelledby="feedback-title">
+          <div class="tw-min-w-0">
+            <label class="tw-mb-2 tw-block tw-break-words tw-text-xs tw-font-medium tw-text-soft" for="feedback-name">Ім’я <span class="tw-text-danger" aria-hidden="true">*</span></label>
+            <input class="tw-block tw-min-h-[44px] tw-w-full tw-min-w-0 tw-border tw-border-solid tw-border-line tw-bg-input tw-px-3 tw-text-sm tw-text-primary placeholder:tw-text-subtle focus-visible:tw-outline focus-visible:tw-outline-[3px] focus-visible:tw-outline-offset-[3px] focus-visible:tw-outline-accent" id="feedback-name" name="name" type="text" autocomplete="name" minlength="2" required aria-describedby="feedback-name-hint feedback-name-error feedback-name-success" aria-invalid="false">
+            <p class="tw-mb-0 tw-mt-2 tw-break-words tw-text-xs tw-text-muted" id="feedback-name-hint">Щонайменше 2 символи.</p>
+            <div class="tw-min-h-[4.5rem] sm:tw-min-h-[3rem]">
+              <p class="tw-m-0 tw-break-words tw-text-xs tw-text-danger" id="feedback-name-error" role="alert" hidden>Введіть ім’я щонайменше з 2 символів.</p>
+              <p class="tw-m-0 tw-break-words tw-text-xs tw-text-accent" id="feedback-name-success" hidden>Коректно</p>
+            </div>
+          </div>
+
+          <div class="tw-min-w-0">
+            <label class="tw-mb-2 tw-block tw-break-words tw-text-xs tw-font-medium tw-text-soft" for="feedback-email">Email <span class="tw-text-danger" aria-hidden="true">*</span></label>
+            <input class="tw-block tw-min-h-[44px] tw-w-full tw-min-w-0 tw-border tw-border-solid tw-border-line tw-bg-input tw-px-3 tw-text-sm tw-text-primary placeholder:tw-text-subtle focus-visible:tw-outline focus-visible:tw-outline-[3px] focus-visible:tw-outline-offset-[3px] focus-visible:tw-outline-accent" id="feedback-email" name="email" type="email" inputmode="email" autocomplete="email" required aria-describedby="feedback-email-hint feedback-email-error feedback-email-success" aria-invalid="false">
+            <p class="tw-mb-0 tw-mt-2 tw-break-words tw-text-xs tw-text-muted" id="feedback-email-hint">Вкажіть адресу електронної пошти.</p>
+            <div class="tw-min-h-[4.5rem] sm:tw-min-h-[3rem]">
+              <p class="tw-m-0 tw-break-words tw-text-xs tw-text-danger" id="feedback-email-error" role="alert" hidden>Введіть коректну адресу email.</p>
+              <p class="tw-m-0 tw-break-words tw-text-xs tw-text-accent" id="feedback-email-success" hidden>Коректно</p>
+            </div>
+          </div>
+
+          <div class="tw-min-w-0">
+            <label class="tw-mb-2 tw-block tw-break-words tw-text-xs tw-font-medium tw-text-soft" for="feedback-phone">Телефон <span class="tw-text-danger" aria-hidden="true">*</span></label>
+            <input class="tw-block tw-min-h-[44px] tw-w-full tw-min-w-0 tw-border tw-border-solid tw-border-line tw-bg-input tw-px-3 tw-text-sm tw-text-primary placeholder:tw-text-subtle focus-visible:tw-outline focus-visible:tw-outline-[3px] focus-visible:tw-outline-offset-[3px] focus-visible:tw-outline-accent" id="feedback-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" pattern="\+380[0-9]{9}" required aria-describedby="feedback-phone-hint feedback-phone-error feedback-phone-success" aria-invalid="false">
+            <p class="tw-mb-0 tw-mt-2 tw-break-words tw-text-xs tw-text-muted" id="feedback-phone-hint">Формат: +380 і 9 цифр, наприклад +380501234567.</p>
+            <div class="tw-min-h-[4.5rem] sm:tw-min-h-[3rem]">
+              <p class="tw-m-0 tw-break-words tw-text-xs tw-text-danger" id="feedback-phone-error" role="alert" hidden>Введіть номер у форматі +380XXXXXXXXX — рівно 9 цифр після +380.</p>
+              <p class="tw-m-0 tw-break-words tw-text-xs tw-text-accent" id="feedback-phone-success" hidden>Коректно</p>
+            </div>
+          </div>
+
+          <div class="tw-min-w-0 md:tw-col-span-2">
+            <label class="tw-mb-2 tw-block tw-break-words tw-text-xs tw-font-medium tw-text-soft" for="feedback-message">Повідомлення <span class="tw-text-danger" aria-hidden="true">*</span></label>
+            <textarea class="tw-block tw-min-h-[140px] tw-w-full tw-min-w-0 tw-resize-y tw-border tw-border-solid tw-border-line tw-bg-input tw-p-3 tw-text-sm tw-leading-relaxed tw-text-primary placeholder:tw-text-subtle focus-visible:tw-outline focus-visible:tw-outline-[3px] focus-visible:tw-outline-offset-[3px] focus-visible:tw-outline-accent" id="feedback-message" name="message" rows="5" minlength="10" required aria-describedby="feedback-message-hint feedback-message-error feedback-message-success" aria-invalid="false"></textarea>
+            <p class="tw-mb-0 tw-mt-2 tw-break-words tw-text-xs tw-text-muted" id="feedback-message-hint">Щонайменше 10 символів.</p>
+            <div class="tw-min-h-[4.5rem] sm:tw-min-h-[3rem]">
+              <p class="tw-m-0 tw-break-words tw-text-xs tw-text-danger" id="feedback-message-error" role="alert" hidden>Повідомлення має містити щонайменше 10 символів.</p>
+              <p class="tw-m-0 tw-break-words tw-text-xs tw-text-accent" id="feedback-message-success" hidden>Коректно</p>
+            </div>
+          </div>
+
+          <div class="tw-min-w-0 md:tw-col-span-2">
+            <div class="tw-flex tw-min-h-[44px] tw-min-w-0 tw-items-center tw-gap-3">
+              <input class="tw-mt-1 tw-min-h-[20px] tw-min-w-[20px] tw-cursor-pointer tw-border tw-border-solid tw-border-line tw-accent-accent focus-visible:tw-outline focus-visible:tw-outline-[3px] focus-visible:tw-outline-offset-2 focus-visible:tw-outline-accent" id="feedback-agreement" name="agreement" type="checkbox" required aria-describedby="feedback-agreement-hint feedback-agreement-error feedback-agreement-success" aria-invalid="false">
+              <label class="tw-min-w-0 tw-break-words tw-text-sm tw-text-soft" for="feedback-agreement">Підтверджую, що ознайомився/лася з демонстраційною політикою конфіденційності. <span class="tw-text-danger" aria-hidden="true">*</span></label>
+            </div>
+            <p class="tw-mb-0 tw-mt-2 tw-break-words tw-text-xs tw-text-muted" id="feedback-agreement-hint">Прочитайте <a class="tw-text-accent tw-underline tw-underline-offset-2 hover:tw-text-primary focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-2 focus-visible:tw-outline-accent" href="#feedback-privacy">демонстраційну політику конфіденційності</a>.</p>
+            <div class="tw-min-h-[4.5rem] sm:tw-min-h-[3rem]">
+              <p class="tw-m-0 tw-break-words tw-text-xs tw-text-danger" id="feedback-agreement-error" role="alert" hidden>Підтвердьте ознайомлення з демонстраційною політикою.</p>
+              <p class="tw-m-0 tw-break-words tw-text-xs tw-text-accent" id="feedback-agreement-success" hidden>Коректно</p>
+            </div>
+          </div>
+
+          <div class="tw-min-w-0 md:tw-col-span-2">
+            <button class="tw-inline-flex tw-min-h-[44px] tw-w-full tw-items-center tw-justify-center tw-border tw-border-solid tw-border-accent tw-bg-accent tw-px-5 tw-py-3 tw-text-center tw-text-sm tw-font-bold tw-text-ink tw-transition-colors hover:tw-bg-accent-hover focus-visible:tw-outline focus-visible:tw-outline-[3px] focus-visible:tw-outline-offset-[3px] focus-visible:tw-outline-accent disabled:tw-cursor-not-allowed disabled:tw-opacity-50 disabled:hover:tw-bg-accent sm:tw-w-auto" id="feedback-submit" type="submit" disabled>Надіслати</button>
+          </div>
+          <p class="tw-m-0 tw-min-h-[3rem] tw-min-w-0 tw-break-words tw-text-xs tw-text-muted md:tw-col-span-2" id="feedback-status" aria-live="polite" role="status"></p>
+        </form>
+
+        <p class="tw-mb-0 tw-mt-6 tw-max-w-3xl tw-scroll-mt-5 tw-break-words tw-border-l-2 tw-border-solid tw-border-line tw-pl-3 tw-text-xs tw-leading-relaxed tw-text-muted" id="feedback-privacy">Демонстраційна політика: ця форма призначена лише для демонстрації перевірки введення у браузері. Дані не надсилаються й не зберігаються.</p>
+
+        <dialog class="tw-m-auto tw-max-h-[calc(100vh-2rem)] tw-w-[calc(100%_-_2rem)] tw-max-w-lg tw-overflow-y-auto tw-border tw-border-solid tw-border-line tw-bg-surface tw-p-5 tw-text-primary backdrop:tw-bg-black/80" id="feedback-success" aria-labelledby="feedback-success-title" aria-describedby="feedback-success-description">
+          <h2 class="tw-mb-3 tw-break-words tw-font-heading tw-text-xl tw-font-medium tw-text-primary" id="feedback-success-title">Перевірку завершено</h2>
+          <p class="tw-mb-5 tw-break-words tw-text-sm tw-leading-relaxed tw-text-muted" id="feedback-success-description">Форма успішно пройшла клієнтську валідацію. Це демонстрація: дані не надіслано.</p>
+          <button class="tw-inline-flex tw-min-h-[44px] tw-w-full tw-items-center tw-justify-center tw-border tw-border-solid tw-border-accent tw-bg-accent tw-px-5 tw-py-3 tw-text-center tw-text-sm tw-font-bold tw-text-ink tw-transition-colors hover:tw-bg-accent-hover focus-visible:tw-outline focus-visible:tw-outline-[3px] focus-visible:tw-outline-offset-[3px] focus-visible:tw-outline-accent sm:tw-w-auto" id="feedback-close" type="button">Закрити</button>
+        </dialog>
+      </section>
       </div>
     </main>
 
@@ -378,7 +456,7 @@
             <p class="accent-text tw-my-3 tw-text-[10px] tw-font-bold tw-text-accent">ПОБАЧТЕ ПОМИЛКУ. ЗМІНІТЬ РІШЕННЯ.</p>
           </div>
           <nav class="footer-links tw-grid tw-grid-cols-1 tw-gap-7 sm:tw-grid-cols-2 [&_>div]:tw-grid [&_>div]:tw-content-start [&_>div]:tw-gap-[9px] [&_h2]:tw-mb-[2px] [&_h2]:tw-font-heading [&_h2]:tw-text-[11px] [&_h2]:tw-leading-[1.35] [&_a]:tw-text-[11px] [&_a]:tw-text-muted [&_a:hover]:tw-text-accent" aria-label="Посилання в підвалі">
-            <div><h2>Продукт</h2><a href="#demo">Демо аналізу</a><a href="#games">Ігри</a><a href="#features">Переваги</a><a href="#how-it-works">Як це працює</a></div>
+            <div><h2>Продукт</h2><a href="#demo">Демо аналізу</a><a href="#games">Ігри</a><a href="#features">Переваги</a><a href="#how-it-works">Як це працює</a><a href="#feedback">Зворотний зв’язок</a></div>
             <div><h2>Довідка</h2><a href="#analysis-form">Демонстраційна форма</a><a href="#faq">Безпека профілю</a><a href="#faq">Поширені запитання</a><a href="#video">Відеопрезентація</a></div>
           </nav>
           <div class="legal-copy tw-border-t tw-border-solid tw-border-line-subtle tw-pt-1 md:tw-col-span-2 lg:tw-col-span-1 sm:tw-border-t-0 sm:tw-pt-0 [&_h2]:tw-mb-[2px] [&_h2]:tw-font-heading [&_h2]:tw-text-[11px] [&_h2]:tw-font-normal [&_h2]:tw-leading-[1.35] [&_p]:tw-my-[9px] [&_p]:tw-text-[10px] [&_p]:tw-text-muted">
