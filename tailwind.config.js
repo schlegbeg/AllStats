@@ -1,5 +1,5 @@
 module.exports = {
-  content: ['./index.html'],
+  content: ['./index.html', './assets/js/**/*.js'],
   prefix: 'tw-',
   theme: {
     extend: {
