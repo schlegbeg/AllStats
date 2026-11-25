@@ -1,0 +1,53 @@
+<svg width="1600" height="900" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Схема: відсутність розміну напарника у CS2">
+  <title>CS2: відсутність розміну напарника</title>
+  <!-- Фон -->
+  <rect width="1600" height="900" fill="#10151d"/>
+  <text x="48" y="72" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#f1f4f7">Відсутність розміну напарника</text>
+  <text x="48" y="116" font-family="Arial, sans-serif" font-size="26" fill="#929ba8">Навчальна схема, а не запис реального матчу</text>
+
+  <!-- Точка на карті -->
+  <rect x="960" y="180" width="520" height="420" rx="8" fill="rgba(57,67,81,0.35)" stroke="#394351" stroke-width="3"/>
+  <text x="1220" y="232" font-family="Arial, sans-serif" font-size="28" fill="#929ba8" text-anchor="middle">точка входу (сайт)</text>
+
+  <!-- Радіус розміну навколо напарника -->
+  <circle cx="1180" cy="420" r="300" fill="none" stroke="#00e3ad" stroke-width="3" stroke-dasharray="14 12"/>
+  <text x="1180" y="620" font-family="Arial, sans-serif" font-size="24" fill="#00e3ad" text-anchor="middle">радіус розміну</text>
+
+  <!-- Напарник, якого вбили -->
+  <circle cx="1180" cy="420" r="26" fill="#00e3ad"/>
+  <text x="1180" y="430" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#080b10" text-anchor="middle">Н</text>
+  <g stroke="#ff4162" stroke-width="7">
+    <line x1="1150" y1="390" x2="1210" y2="450"/>
+    <line x1="1210" y1="390" x2="1150" y2="450"/>
+  </g>
+  <text x="1180" y="380" font-family="Arial, sans-serif" font-size="26" fill="#ff4162" text-anchor="middle">напарника вбито — розміну не було</text>
+
+  <!-- Гравець надто далеко -->
+  <circle cx="330" cy="680" r="26" fill="#00e3ad"/>
+  <text x="330" y="690" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#080b10" text-anchor="middle">В</text>
+  <text x="330" y="750" font-family="Arial, sans-serif" font-size="26" fill="#f1f4f7" text-anchor="middle">Ви — надто далеко позаду</text>
+
+  <!-- Лінія надто великої дистанції -->
+  <path d="M 360 655 Q 720 560 1150 440" fill="none" stroke="#ff4162" stroke-width="6" stroke-dasharray="18 14"/>
+  <text x="600" y="540" font-family="Arial, sans-serif" font-size="26" fill="#ff4162">дистанція більша за радіус розміну</text>
+
+  <!-- Рекомендація: правильна позиція -->
+  <circle cx="920" cy="500" r="22" fill="none" stroke="#00e3ad" stroke-width="4" stroke-dasharray="8 8"/>
+  <text x="920" y="508" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#00e3ad" text-anchor="middle">2</text>
+  <path d="M 370 690 L 880 515" fill="none" stroke="#00e3ad" stroke-width="6" stroke-dasharray="18 14" marker-end="url(#arrowGreen)"/>
+  <text x="450" y="620" font-family="Arial, sans-serif" font-size="26" fill="#00e3ad">Рішення: тримайтеся 2–3 кроки позади напарника</text>
+
+  <!-- Легенда -->
+  <g font-family="Arial, sans-serif" font-size="24">
+    <circle cx="1330" cy="120" r="12" fill="#ff4162"/>
+    <text x="1352" y="128" fill="#ff4162">загроза</text>
+    <circle cx="1330" cy="164" r="12" fill="#00e3ad"/>
+    <text x="1352" y="172" fill="#00e3ad">рекомендація</text>
+  </g>
+
+  <defs>
+    <marker id="arrowGreen" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto">
+      <path d="M 1 1 L 10 5 L 1 9" fill="none" stroke="#00e3ad" stroke-width="2.5"/>
+    </marker>
+  </defs>
+</svg>

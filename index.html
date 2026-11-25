@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=JetBrains+Mono:wght@400&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.2.10/swiper-bundle.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css">
   <link rel="stylesheet" href="css/tailwind.generated.css">
   <script src="./assets/js/validation.js" defer></script>
 </head>
@@ -31,6 +33,7 @@
           </summary>
           <nav aria-label="Мобільна навігація" class="tw-absolute tw-right-0 tw-top-full tw-z-50 tw-mt-2 tw-grid tw-w-[260px] tw-max-w-[calc(100vw-48px)] tw-gap-1 tw-border tw-border-solid tw-border-line tw-bg-surface tw-p-3 tw-shadow-xl">
             <a href="#demo" class="tw-flex tw-min-h-[44px] tw-items-center tw-px-3 hover:tw-text-accent focus-visible:tw-outline">Демо аналізу</a>
+            <a href="#analysis-gallery" class="tw-flex tw-min-h-[44px] tw-items-center tw-px-3 hover:tw-text-accent focus-visible:tw-outline">Галерея</a>
             <a href="#games" class="tw-flex tw-min-h-[44px] tw-items-center tw-px-3 hover:tw-text-accent focus-visible:tw-outline">Ігри</a>
             <a href="#features" class="tw-flex tw-min-h-[44px] tw-items-center tw-px-3 hover:tw-text-accent focus-visible:tw-outline">Переваги</a>
             <a href="#how-it-works" class="tw-flex tw-min-h-[44px] tw-items-center tw-px-3 hover:tw-text-accent focus-visible:tw-outline">Як це працює</a>
@@ -41,6 +44,7 @@
 
         <nav class="header-navigation tw-min-w-0 tw-order-3 tw-hidden tw-w-full tw-flex-wrap tw-items-center tw-justify-center tw-gap-x-6 tw-gap-y-3 md:tw-flex lg:tw-order-none lg:tw-w-auto [&_a]:tw-text-xs [&_a]:tw-text-muted [&_a:hover]:tw-text-accent" aria-label="Основна навігація">
           <a href="#demo">Демо аналізу</a>
+          <a href="#analysis-gallery">Галерея</a>
           <a href="#games">Ігри</a>
           <a href="#features">Переваги</a>
           <a href="#how-it-works">Як це працює</a>
@@ -300,6 +304,149 @@
       </section>
 
       <!-- Відео завантажується лише після запиту відвідувача. -->
+      <!-- Галерея перенесена з користувацького експорту Bolt/StackBlitz. -->
+      <section id="analysis-gallery" aria-labelledby="gallery-title" class="[--swiper-theme-color:#00e3ad] [--swiper-pagination-bullet-inactive-color:#394351] [--swiper-pagination-bullet-inactive-opacity:1] tw-mx-auto tw-max-w-5xl tw-min-w-0 tw-scroll-mt-5 tw-border-b tw-border-line-subtle tw-py-6 sm:tw-py-8">
+        <header class="tw-mb-4">
+          <h2 id="gallery-title" class="tw-font-heading tw-text-2xl tw-font-bold">Галерея розбору помилок</h2>
+          <p class="tw-text-xs tw-leading-5 tw-text-muted tw-mt-2">
+            Навчальні приклади (демо-ситуації), а не результати реальних матчів. Натисніть на схему, щоб збільшити її.
+          </p>
+        </header>
+
+        <!-- Карусель -->
+        <div class="tw-analysis-swiper tw-w-full tw-min-w-0 [--swiper-theme-color:#00e3ad] [--swiper-pagination-bullet-inactive-color:#394351] [--swiper-pagination-bullet-inactive-opacity:1]" role="region" aria-roledescription="карусель" aria-label="Галерея розбору помилок">
+          <div class="swiper-wrapper tw-ease-linear tw-grid tw-grid-cols-1 tw-gap-5 md:tw-grid-cols-2 lg:tw-grid-cols-3">
+            <!-- Слайд 1: CS2 — Вихід без перевірки кута -->
+            <div class="swiper-slide !tw-h-auto">
+              <article class="tw-bg-surface tw-border tw-border-line tw-rounded-none tw-flex tw-flex-col tw-h-full">
+                <p class="tw-px-3 tw-pt-3 tw-text-xs tw-text-muted">
+                  <span class="tw-text-accent">CS2</span> · Слайд 1 з 5 · демо-приклад
+                </p>
+                <h3 class="tw-px-3 tw-pt-1 tw-text-base tw-font-semibold">Вихід без перевірки кута</h3>
+                <a href="assets/diagrams/cs2-angle-check.svg" data-fancybox="allstats-gallery" data-type="image" data-width="1600" data-height="900" data-caption="CS2 — Вихід без перевірки кута. Помилка: вихід у відкриту зону без перевірки кута. Рішення: рухайтеся вздовж стіни та перевіряйте кут прицілом." class="tw-block tw-mt-2 tw-outline-none focus-visible:tw-ring-2 focus-visible:tw-ring-accent" aria-label="Збільшити схему: Вихід без перевірки кута">
+                  <img loading="lazy" decoding="async" src="assets/diagrams/cs2-angle-check.svg" alt="Схема: гравець виходить у відкриту зону CS2, не перевіривши кут, де ховається ворог. Зелений шлях уздовж стіни — безпечний варіант." class="tw-block tw-h-[144px] tw-w-full tw-object-contain sm:tw-h-40" width="1600" height="900" />
+                </a>
+                <div class="tw-px-3 tw-py-3 tw-space-y-2">
+                  <p class="tw-text-xs tw-leading-5">
+                    <span class="tw-text-danger tw-font-semibold">Помилка:</span>
+                    гравець виходить у відкриту зону й не перевіряє прихований кут, де може чекати суперник.
+                  </p>
+                  <p class="tw-text-xs tw-leading-5">
+                    <span class="tw-text-accent tw-font-semibold">Рішення:</span>
+                    рухайтеся вздовж стіни й одразу наводьте приціл на кут перед виходом у відкриту.
+                  </p>
+                  <button type="button" data-gallery-trigger hidden aria-label="Збільшити схему: Вихід без перевірки кута" class="tw-hidden tw-min-h-[36px] tw-text-xs tw-text-accent tw-underline tw-outline-none focus-visible:tw-ring-2 focus-visible:tw-ring-accent">Збільшити</button>
+                </div>
+              </article>
+            </div>
+
+            <!-- Слайд 2: CS2 — Відсутність розміну напарника -->
+            <div class="swiper-slide !tw-h-auto">
+              <article class="tw-bg-surface tw-border tw-border-line tw-rounded-none tw-flex tw-flex-col tw-h-full">
+                <p class="tw-px-3 tw-pt-3 tw-text-xs tw-text-muted">
+                  <span class="tw-text-accent">CS2</span> · Слайд 2 з 5 · демо-приклад
+                </p>
+                <h3 class="tw-px-3 tw-pt-1 tw-text-base tw-font-semibold">Відсутність розміну напарника</h3>
+                <a href="assets/diagrams/cs2-trade.svg" data-fancybox="allstats-gallery" data-type="image" data-width="1600" data-height="900" data-caption="CS2 — Відсутність розміну напарника. Помилка: надто велика дистанція між гравцями. Рішення: тримайтеся 2–3 кроки позади напарника." class="tw-block tw-mt-2 tw-outline-none focus-visible:tw-ring-2 focus-visible:tw-ring-accent" aria-label="Збільшити схему: Відсутність розміну напарника">
+                  <img loading="lazy" decoding="async" src="assets/diagrams/cs2-trade.svg" alt="Схема: напарника вбито на точці в CS2, а гравець стоїть надто далеко, щоб зробити розмін. Зелений радіус показує безпечну дистанцію." class="tw-block tw-h-[144px] tw-w-full tw-object-contain sm:tw-h-40" width="1600" height="900" />
+                </a>
+                <div class="tw-px-3 tw-py-3 tw-space-y-2">
+                  <p class="tw-text-xs tw-leading-5">
+                    <span class="tw-text-danger tw-font-semibold">Помилка:</span>
+                    гравець стоїть надто далеко й не може зробити розмін після смерті напарника.
+                  </p>
+                  <p class="tw-text-xs tw-leading-5">
+                    <span class="tw-text-accent tw-font-semibold">Рішення:</span>
+                    тримайтеся 2–3 кроки позади напарника в межах радіуса розміну.
+                  </p>
+                  <button type="button" data-gallery-trigger hidden aria-label="Збільшити схему: Відсутність розміну напарника" class="tw-hidden tw-min-h-[36px] tw-text-xs tw-text-accent tw-underline tw-outline-none focus-visible:tw-ring-2 focus-visible:tw-ring-accent">Збільшити</button>
+                </div>
+              </article>
+            </div>
+
+            <!-- Слайд 3: Dota 2 — Бій без огляду -->
+            <div class="swiper-slide !tw-h-auto">
+              <article class="tw-bg-surface tw-border tw-border-line tw-rounded-none tw-flex tw-flex-col tw-h-full">
+                <p class="tw-px-3 tw-pt-3 tw-text-xs tw-text-muted">
+                  <span class="tw-text-accent">Dota 2</span> · Слайд 3 з 5 · демо-приклад
+                </p>
+                <h3 class="tw-px-3 tw-pt-1 tw-text-base tw-font-semibold">Бій без огляду</h3>
+                <a href="assets/diagrams/dota2-fight-vision.svg" data-fancybox="allstats-gallery" data-type="image" data-width="1600" data-height="900" data-caption="Dota 2 — Бій без огляду. Помилка: команда приймає бій у тумані війни без вардів. Рішення: поставте обсервер-вард перед боєм." class="tw-block tw-mt-2 tw-outline-none focus-visible:tw-ring-2 focus-visible:tw-ring-accent" aria-label="Збільшити схему: Бій без огляду">
+                  <img loading="lazy" decoding="async" src="assets/diagrams/dota2-fight-vision.svg" alt="Схема Dota 2: команда вступає в бій у тумані війни, і вороги атакують з трьох прихованих зон. Зелений вард показує рішення." class="tw-block tw-h-[144px] tw-w-full tw-object-contain sm:tw-h-40" width="1600" height="900" />
+                </a>
+                <div class="tw-px-3 tw-py-3 tw-space-y-2">
+                  <p class="tw-text-xs tw-leading-5">
+                    <span class="tw-text-danger tw-font-semibold">Помилка:</span>
+                    команда приймає бій без огляду й отримує засідку з туману війни.
+                  </p>
+                  <p class="tw-text-xs tw-leading-5">
+                    <span class="tw-text-accent tw-font-semibold">Рішення:</span>
+                    поставте обсервер-вард перед боєм, щоб бачити підходи ворога.
+                  </p>
+                  <button type="button" data-gallery-trigger hidden aria-label="Збільшити схему: Бій без огляду" class="tw-hidden tw-min-h-[36px] tw-text-xs tw-text-accent tw-underline tw-outline-none focus-visible:tw-ring-2 focus-visible:tw-ring-accent">Збільшити</button>
+                </div>
+              </article>
+            </div>
+
+            <!-- Слайд 4: Dota 2 — Запізніла ротація -->
+            <div class="swiper-slide !tw-h-auto">
+              <article class="tw-bg-surface tw-border tw-border-line tw-rounded-none tw-flex tw-flex-col tw-h-full">
+                <p class="tw-px-3 tw-pt-3 tw-text-xs tw-text-muted">
+                  <span class="tw-text-accent">Dota 2</span> · Слайд 4 з 5 · демо-приклад
+                </p>
+                <h3 class="tw-px-3 tw-pt-1 tw-text-base tw-font-semibold">Запізніла ротація</h3>
+                <a href="assets/diagrams/dota2-late-rotation.svg" data-fancybox="allstats-gallery" data-type="image" data-width="1600" data-height="900" data-caption="Dota 2 — Запізніла ротація. Помилка: допомога пішки прибуває надто пізно. Рішення: телепорт-скролл і реакція протягом 5 секунд." class="tw-block tw-mt-2 tw-outline-none focus-visible:tw-ring-2 focus-visible:tw-ring-accent" aria-label="Збільшити схему: Запізніла ротація">
+                  <img loading="lazy" decoding="async" src="assets/diagrams/dota2-late-rotation.svg" alt="Схема Dota 2: гравець на центрі надто повільно йде пішки на верхню лінію, де під тиском напарник. Зелений шлях — телепорт-скролл." class="tw-block tw-h-[144px] tw-w-full tw-object-contain sm:tw-h-40" width="1600" height="900" />
+                </a>
+                <div class="tw-px-3 tw-py-3 tw-space-y-2">
+                  <p class="tw-text-xs tw-leading-5">
+                    <span class="tw-text-danger tw-font-semibold">Помилка:</span>
+                    ротація пішки займає понад 40 секунд — допомога прибуває, коли напарник вже програв розмін.
+                  </p>
+                  <p class="tw-text-xs tw-leading-5">
+                    <span class="tw-text-accent tw-font-semibold">Рішення:</span>
+                    використовуйте телепорт-скролл і реагуйте на загрозу протягом 5 секунд.
+                  </p>
+                  <button type="button" data-gallery-trigger hidden aria-label="Збільшити схему: Запізніла ротація" class="tw-hidden tw-min-h-[36px] tw-text-xs tw-text-accent tw-underline tw-outline-none focus-visible:tw-ring-2 focus-visible:tw-ring-accent">Збільшити</button>
+                </div>
+              </article>
+            </div>
+
+            <!-- Слайд 5: Шахи — Незахищена фігура -->
+            <div class="swiper-slide !tw-h-auto">
+              <article class="tw-bg-surface tw-border tw-border-line tw-rounded-none tw-flex tw-flex-col tw-h-full">
+                <p class="tw-px-3 tw-pt-3 tw-text-xs tw-text-muted">
+                  <span class="tw-text-accent">Шахи</span> · Слайд 5 з 5 · демо-приклад
+                </p>
+                <h3 class="tw-px-3 tw-pt-1 tw-text-base tw-font-semibold">Незахищена фігура</h3>
+                <a href="assets/diagrams/chess-hanging-piece.svg" data-fancybox="allstats-gallery" data-type="image" data-width="1600" data-height="900" data-caption="Шахи — Незахищена фігура. Помилка: ферзь залишається під боєм ладії без захисту. Рішення: відступ на безпечне поле або підтримка іншою фігурою." class="tw-block tw-mt-2 tw-outline-none focus-visible:tw-ring-2 focus-visible:tw-ring-accent" aria-label="Збільшити схему: Незахищена фігура">
+                  <img loading="lazy" decoding="async" src="assets/diagrams/chess-hanging-piece.svg" alt="Шахова схема: білий ферзь на d5 стоїть під боєм чорної ладії з d8 і не захищений. Зелена стрілка показує відступ на безпечне поле." class="tw-block tw-h-[144px] tw-w-full tw-object-contain sm:tw-h-40" width="1600" height="900" />
+                </a>
+                <div class="tw-px-3 tw-py-3 tw-space-y-2">
+                  <p class="tw-text-xs tw-leading-5">
+                    <span class="tw-text-danger tw-font-semibold">Помилка:</span>
+                    ферзь стоїть на відкритій вертикалі під боєм ладії й ніщо його не захищає.
+                  </p>
+                  <p class="tw-text-xs tw-leading-5">
+                    <span class="tw-text-accent tw-font-semibold">Рішення:</span>
+                    перед кожним ходом перевіряйте, чи не «висить» фігура, і підтримуйте її іншою.
+                  </p>
+                  <button type="button" data-gallery-trigger hidden aria-label="Збільшити схему: Незахищена фігура" class="tw-hidden tw-min-h-[36px] tw-text-xs tw-text-accent tw-underline tw-outline-none focus-visible:tw-ring-2 focus-visible:tw-ring-accent">Збільшити</button>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <!-- Керування каруселлю -->
+        <div data-gallery-controls hidden class="tw-hidden tw-mt-3 tw-flex tw-flex-wrap tw-items-center tw-gap-4">
+          <button type="button" class="tw-analysis-prev tw-min-w-10 tw-min-h-[44px] tw-px-3 tw-min-h-[44px] tw-border tw-border-line tw-bg-surface tw-text-primary hover:tw-border-accent tw-rounded-none tw-outline-none focus-visible:tw-ring-2 focus-visible:tw-ring-accent" aria-label="Попередній слайд">&#8592;</button>
+          <button type="button" class="tw-analysis-next tw-min-w-10 tw-min-h-[44px] tw-px-3 tw-min-h-[44px] tw-border tw-border-line tw-bg-surface tw-text-primary hover:tw-border-accent tw-rounded-none tw-outline-none focus-visible:tw-ring-2 focus-visible:tw-ring-accent" aria-label="Наступний слайд">&#8594;</button>
+          <div class="swiper-pagination tw-analysis-pagination !tw-static !tw-w-auto tw-flex tw-min-h-[44px] tw-flex-1 tw-flex-wrap tw-items-center tw-justify-center tw-gap-2 [&_.swiper-pagination-bullet]:tw-h-3 [&_.swiper-pagination-bullet]:tw-w-3"></div>
+          <button type="button" class="tw-analysis-toggle tw-min-h-[44px] tw-px-4 tw-border tw-border-line tw-bg-surface tw-text-primary hover:tw-border-accent tw-rounded-none tw-outline-none focus-visible:tw-ring-2 focus-visible:tw-ring-accent" aria-pressed="false">Пауза</button>
+        </div>
+      </section>
+
       <section class="content-section tw-scroll-mt-5 tw-border-b tw-border-solid tw-border-line-subtle tw-py-[38px] sm:tw-py-14" id="video">
       <div class="section-heading tw-mb-[19px] sm:tw-mb-[26px] [&_h2]:tw-mb-[10px] [&_h2]:tw-font-heading [&_h2]:tw-text-2xl [&_h2]:tw-font-medium [&_h2]:tw-leading-[1.2] sm:[&_h2]:tw-text-[clamp(23px,2.7vw,31px)] [&_p:last-child]:tw-mb-0 [&_p:last-child]:tw-max-w-[760px] [&_p:last-child]:tw-text-xs [&_p:last-child]:tw-text-muted sm:[&_p:last-child]:tw-text-[13px]">
           <p class="eyebrow tw-mb-[10px] tw-font-bold tw-text-[10px] tw-uppercase tw-tracking-[.035em] tw-text-accent">ВІДЕОПРЕЗЕНТАЦІЯ</p>
@@ -671,5 +818,9 @@
       });
     }
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11.2.10/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js"></script>
+  <script src="assets/js/gallery.js"></script>
 </body>
 </html>
+
